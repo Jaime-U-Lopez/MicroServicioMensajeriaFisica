@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Customer extends Employee.Person {
+public class Customer extends Person  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,9 +16,8 @@ public class Customer extends Employee.Person {
     private String direccionResidencia;
     private String ciudad;
 
-    public Customer(long cedula, String name, String lastName, Integer id, long celular, String correoElectronico, String direccionResidencia, String ciudad) {
+    public Customer(long cedula, String name, String lastName, long celular, String correoElectronico, String direccionResidencia, String ciudad) {
         super(cedula, name, lastName);
-        this.id = id;
         this.celular = celular;
         this.correoElectronico = correoElectronico;
         this.direccionResidencia = direccionResidencia;

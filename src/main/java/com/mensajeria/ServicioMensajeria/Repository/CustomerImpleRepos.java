@@ -3,39 +3,46 @@ package com.mensajeria.ServicioMensajeria.Repository;
 
 import com.mensajeria.ServicioMensajeria.Model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+
+@Repository
 public class CustomerImpleRepos implements CustomerDAO {
 
 
+
+    public CustomerRepository customerRepository;
+
     @Autowired
-    public CustomerImpleRepos() {
+    public CustomerImpleRepos(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
     }
-
+    public CustomerImpleRepos(){};
 
     @Override
-    public boolean createElement(Customer customer) {
+    public boolean create(Customer customer) {
         return false;
     }
 
     @Override
-    public boolean deleteElement(Integer id) {
+    public boolean delete(Integer id) {
         return false;
     }
 
     @Override
-    public List<Object> getElementAll() {
+    public List<Customer> getCustomersAll() {
         return null;
     }
 
     @Override
-    public Object getElement(Integer id) {
+    public Customer getCustomer(Integer id) {
         return null;
     }
 
     @Override
-    public boolean UpdateElement(Customer customer) {
+    public boolean UpdateCustomer(Customer customer) {
         return false;
     }
 }

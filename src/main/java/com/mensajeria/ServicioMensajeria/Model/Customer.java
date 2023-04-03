@@ -1,20 +1,31 @@
 package com.mensajeria.ServicioMensajeria.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
 
 @Entity
-public class Customer extends Person  {
+@Table(name = "customers")
+public class Customer extends Person  implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Integer id;
     private long celular;
     private String correoElectronico;
     private String direccionResidencia;
     private String ciudad;
+
+    private Person person;
+
+    @OneToMany
+    List<SendPackage> sendPackages;
+
+
+    public Customer(){};
 
     public Customer(long cedula, String name, String lastName, long celular, String correoElectronico, String direccionResidencia, String ciudad) {
         super(cedula, name, lastName);

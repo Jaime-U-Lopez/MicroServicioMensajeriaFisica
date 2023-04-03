@@ -1,16 +1,26 @@
 package com.mensajeria.ServicioMensajeria.Model;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-public class Employee extends Person {
+@Table(name = "employees")
+public class Employee extends Person implements Serializable {
 
+    private static final long serialVersionUID = 1L;
 
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Integer id;
+
     private Date antiguedad;
     private char tipoSangreRH;
+
+    @Enumerated(EnumType.STRING)
     private TypeEmpleoyerEnum typeEmpleoyer;
+
     private long celular;
     private String correoElectronico;
     private String direccionResidencia;

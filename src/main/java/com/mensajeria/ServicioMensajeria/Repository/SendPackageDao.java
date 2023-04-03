@@ -1,14 +1,16 @@
 package com.mensajeria.ServicioMensajeria.Repository;
 
+import com.mensajeria.ServicioMensajeria.Dto.SendPackageDTO;
+
 import java.util.List;
 
 public interface SendPackageDao {
 
 
-    SendPackageDao create(SendPackageDao sendPackageDao );
-    SendPackageDao update(SendPackageDao sendPackageDao);
+    SendPackageDTO create(SendPackageDTO sendPackageDTO );
+    SendPackageDTO update(SendPackageDTO sendPackageDTO);
     Boolean delete(Integer id);
-    List<SendPackageDao> getSendPackagesAll();
-    SendPackageDao getSendPackage(Integer id);
+    List<SendPackageDTO> getSendPackagesAll();
+    SendPackageDTO getSendPackage(Integer id);
 
 }

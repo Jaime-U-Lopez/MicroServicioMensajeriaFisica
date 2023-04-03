@@ -8,15 +8,15 @@ import java.util.List;
 public interface CustomerDAO {
 
 
-    public boolean createElement(Customer customer);
+    public boolean create(Customer customer);
 
-    public boolean deleteElement(Integer id);
+    public boolean delete(Integer id);
 
-    public List<Object> getElementAll();
+    public List<Customer> getCustomersAll();
 
-    public Object getElement(Integer id);
+    public Customer getCustomer(Integer id);
 
-    public boolean UpdateElement(Customer customer);
+    public boolean UpdateCustomer(Customer customer);
 
 
 

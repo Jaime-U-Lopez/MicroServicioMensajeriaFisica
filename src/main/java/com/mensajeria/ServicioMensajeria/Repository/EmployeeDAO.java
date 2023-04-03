@@ -1,17 +1,19 @@
 package com.mensajeria.ServicioMensajeria.Repository;
 
 import com.mensajeria.ServicioMensajeria.Dto.EmployeeDTO;
+import com.mensajeria.ServicioMensajeria.Model.Employee;
 
 import java.util.List;
 
 public interface EmployeeDAO {
 
-    EmployeeDTO create(EmployeeDTO employeeDTO );
-    List<EmployeeDTO> getEmployeesAll();
+    Employee create(Employee employee );
+    List<Employee> getEmployeesAll();
 
-    EmployeeDTO getEmployee();
+    Employee getEmployee( Integer id);
 
     Boolean deleteEmployee( Integer Id);
 
+    Employee UpdateEmployee( Employee employee );
 
 }

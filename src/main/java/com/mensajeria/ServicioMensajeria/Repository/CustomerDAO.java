@@ -8,7 +8,7 @@ import java.util.List;
 public interface CustomerDAO {
 
 
-    public boolean create(Customer customer);
+    public Customer create(Customer customer);
 
     public boolean delete(Integer id);
 

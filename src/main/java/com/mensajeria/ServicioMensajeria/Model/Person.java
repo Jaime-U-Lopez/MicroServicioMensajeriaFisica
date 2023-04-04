@@ -6,21 +6,20 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "persons")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Person implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    private long cedula;
+    private Integer cedula;
     private String name;
     private String lastName;
 
 
     public Person(){};
-
-    public Person(long cedula, String name, String lastName) {
+@Autowired
+    public Person(Integer cedula, String name, String lastName) {
         this.cedula = cedula;
         this.name = name;
         this.lastName = lastName;
@@ -30,7 +29,7 @@ public class Person implements Serializable {
         return cedula;
     }
 
-    public void setCedula(long cedula) {
+    public void setCedula(Integer cedula) {
         this.cedula = cedula;
     }
 

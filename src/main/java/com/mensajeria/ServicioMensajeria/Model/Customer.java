@@ -10,16 +10,11 @@ public class Customer extends Person  implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private Integer id;
     private long celular;
     private String correoElectronico;
     private String direccionResidencia;
     private String ciudad;
-
-    private Person person;
 
     @OneToMany
     List<SendPackage> sendPackages;
@@ -27,17 +22,17 @@ public class Customer extends Person  implements Serializable {
 
     public Customer(){};
 
-    public Customer(long cedula, String name, String lastName, long celular, String correoElectronico, String direccionResidencia, String ciudad) {
+
+    public Customer(Integer cedula, String name, String lastName, long celular, String correoElectronico, String direccionResidencia, String ciudad, List<SendPackage> sendPackages) {
         super(cedula, name, lastName);
         this.celular = celular;
         this.correoElectronico = correoElectronico;
         this.direccionResidencia = direccionResidencia;
         this.ciudad = ciudad;
+        this.sendPackages = sendPackages;
     }
 
-    public int getId() {
-        return id;
-    }
+
 
 
     public long getCelular() {

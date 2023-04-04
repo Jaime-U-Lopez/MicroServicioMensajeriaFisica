@@ -10,13 +10,10 @@ public class Employee extends Person implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Integer id;
 
     private Date antiguedad;
-    private char tipoSangreRH;
+    @Column(name="tipo_sangre_RH")
+    private String tipoSangreRH;
 
     @Enumerated(EnumType.STRING)
     private TypeEmpleoyerEnum typeEmpleoyer;
@@ -26,7 +23,7 @@ public class Employee extends Person implements Serializable {
     private String direccionResidencia;
     private String ciudad;
 
-    public Employee(long cedula, String name, String lastName, Date antiguedad, char tipoSangreRH, TypeEmpleoyerEnum typeEmpleoyer, long celular, String correoElectronico, String direccionResidencia, String ciudad) {
+    public Employee(Integer cedula, String name, String lastName, Date antiguedad, String tipoSangreRH, TypeEmpleoyerEnum typeEmpleoyer, long celular, String correoElectronico, String direccionResidencia, String ciudad) {
         super(cedula, name, lastName);
         this.antiguedad = antiguedad;
         this.tipoSangreRH = tipoSangreRH;
@@ -37,9 +34,7 @@ public class Employee extends Person implements Serializable {
         this.ciudad = ciudad;
     }
 
-    public int getId() {
-        return id;
-    }
+
 
     public Date getAntiguedad() {
         return antiguedad;
@@ -49,11 +44,11 @@ public class Employee extends Person implements Serializable {
         this.antiguedad = antiguedad;
     }
 
-    public char getTipoSangreRH() {
+    public String getTipoSangreRH() {
         return tipoSangreRH;
     }
 
-    public void setTipoSangreRH(char tipoSangreRH) {
+    public void setTipoSangreRH(String tipoSangreRH) {
         this.tipoSangreRH = tipoSangreRH;
     }
 

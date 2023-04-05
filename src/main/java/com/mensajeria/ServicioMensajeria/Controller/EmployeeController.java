@@ -1,7 +1,6 @@
 package com.mensajeria.ServicioMensajeria.Controller;
 
 
-import com.mensajeria.ServicioMensajeria.Model.Customer;
 import com.mensajeria.ServicioMensajeria.Model.Employee;
 import com.mensajeria.ServicioMensajeria.Service.EmployeeServiceImple;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,34 +22,51 @@ public class EmployeeController {
         this.employeeServiceImple = employeeServiceImple;
     }
 
-    @PostMapping("employee")
-    public ResponseEntity<Employee> create(@RequestBody Employee employee){
+    @PostMapping("employees")
+    public ResponseEntity<Employee> create(@RequestBody Employee employee) {
 
         Employee employeeCreate = this.employeeServiceImple.create(employee);
         return ResponseEntity.status(HttpStatus.CREATED).body(employeeCreate);
 
     }
 
-    @GetMapping("employee")
-    public List<Employee> getEmployeeAll(){
+    @GetMapping("employees")
+    public List<Employee> getEmployeeAll() {
         return this.employeeServiceImple.getEmployeeAll();
     }
 
-    @GetMapping("employee/{id}")
-    public Employee getCustomer(@PathVariable Integer id){
+    @GetMapping("employees/{id}")
+    public Employee getCustomer(@PathVariable Integer id) {
         return this.employeeServiceImple.getEmployee(id);
     }
 
-    @DeleteMapping("employee/{id}")
-    public Boolean delete(@PathVariable Integer cedula ){
+    @DeleteMapping("employees/{id}")
+    public ResponseEntity<String> delete(@PathVariable Integer cedula) {
 
-        return this.employeeServiceImple.delete(cedula);
+        Boolean deleted = this.employeeServiceImple.delete(cedula);
+
+
+        if (deleted) {
+
+            String messaje = "El empleado con cedula " + cedula + "fue eliminado con exito";
+            return ResponseEntity.ok(messaje);
+
+        } else {
+            String messaje = "El empleado con cedula " + cedula + "no fue eliminado, valide la cedula ingresada, no  existe en la base de datos";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(messaje);
+        }
+
+
     }
 
 
+    @PutMapping("employees")
+        public ResponseEntity<Employee> updateEmployee (@RequestBody Employee employee){
 
+        Employee empleado= this.employeeServiceImple.updateEmployee(employee);
 
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(empleado);
 
-
+    }
 
 }

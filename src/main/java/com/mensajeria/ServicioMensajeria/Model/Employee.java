@@ -11,9 +11,6 @@ public class Employee extends Person implements Serializable {
     private static final long serialVersionUID = 1L;
 
 
-    private Date antiguedad;
-    @Column(name="tipo_sangre_RH")
-    private String tipoSangreRH;
 
     @Enumerated(EnumType.STRING)
     private TypeEmpleoyerEnum typeEmpleoyer;
@@ -22,6 +19,9 @@ public class Employee extends Person implements Serializable {
     private String correoElectronico;
     private String direccionResidencia;
     private String ciudad;
+    private Date antiguedad;
+    @Column(name="tipo_sangre_RH")
+    private String tipoSangreRH;
 
     public Employee(Integer cedula, String name, String lastName, Date antiguedad, String tipoSangreRH, TypeEmpleoyerEnum typeEmpleoyer, long celular, String correoElectronico, String direccionResidencia, String ciudad) {
         super(cedula, name, lastName);

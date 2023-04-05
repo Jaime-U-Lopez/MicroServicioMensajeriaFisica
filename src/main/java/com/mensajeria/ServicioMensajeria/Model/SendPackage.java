@@ -22,10 +22,12 @@ public class SendPackage implements Serializable {
     private Customer customer;
     @OneToOne
     private Packages packages;
-    private int valorEnvio;
+
+
     private long celularPersonaRecibe;
     private String nombrePersonaRecibe;
     private String horaEntrega;
+    private int valorEnvio;
 
     @Enumerated(EnumType.STRING)
     private StateSendPackageEnum estadoEnvio;
@@ -35,8 +37,8 @@ public class SendPackage implements Serializable {
     @JsonIgnoreProperties("sendPackage")
     private AdressSendComp adress_send;
 
-    public SendPackage(Integer numeroGuia, Customer customer, Packages packages, int valorEnvio, long celularPersonaRecibe, String nombrePersonaRecibe, String horaEntrega, StateSendPackageEnum estadoEnvio, AdressSendComp adress_send) {
-        this.numeroGuia = numeroGuia;
+    public SendPackage( Customer customer, Packages packages, int valorEnvio, long celularPersonaRecibe, String nombrePersonaRecibe, String horaEntrega, StateSendPackageEnum estadoEnvio, AdressSendComp adress_send) {
+
         this.customer = customer;
         this.packages = packages;
         this.valorEnvio = valorEnvio;

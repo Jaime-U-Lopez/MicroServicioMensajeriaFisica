@@ -15,6 +15,9 @@ public interface CustomerService {
 
     Boolean delete(Integer cedula);
 
+    Customer updateCustomer(Customer customer);
+
+
 
 
 

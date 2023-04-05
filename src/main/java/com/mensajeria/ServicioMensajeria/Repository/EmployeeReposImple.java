@@ -58,6 +58,7 @@ public class EmployeeReposImple implements EmployeeDAO{
 
     @Override
     public Employee UpdateEmployee(Employee employee) {
-        return null;
+
+        return this.employeeRepository.saveAndFlush(employee);
     }
 }

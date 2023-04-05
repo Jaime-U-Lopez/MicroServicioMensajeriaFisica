@@ -64,6 +64,10 @@ public class CustomerReposImple implements CustomerDAO {
 
     @Override
     public boolean UpdateCustomer(Customer customer) {
-        return false;
+
+
+        this.customerRepository.saveAndFlush(customer);
+
+        return true;
     }
 }

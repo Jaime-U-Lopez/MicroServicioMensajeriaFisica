@@ -22,32 +22,14 @@ public class SendPackageImple implements SendPackageDao {
 
 
     @Override
-    public SendPackage create(SendPackageDTO sendPackageDTO) {
+    public SendPackage create(SendPackage sendPackage) {
+        return  this.sendPackageRepository.save(sendPackage);
 
-        /*
-
-                Customer customer = Optional.ofNullable(sendPackageDTO.getDocumento_identidad())
-                .map(dni -> new Cliente(dni))
-                .orElseThrow(() -> new ReservaInvalidoException("No se pudo crear la reserva, valide que la reserva tenga un cliente asociado"));
-
-        Packages package = Optional.ofNullable(reservaDto.getNumero_habitacion())
-                .map(dni -> new Habitacion(dni))
-                .orElseThrow(() -> new ReservaInvalidoException("No se pudo crear la reserva, valide que la reserva tenga un habitacion  asociado"));
-
-        SendPackage sendPackage = new SendPackage(
-                sendPackage.getFecha()
-                ,documentoIdentidad
-                ,habitacion
-        );
-
- */
-
-        return null;
     }
 
     @Override
-    public SendPackageDTO update(SendPackageDTO sendPackageDTO) {
-        return null;
+    public SendPackage update(SendPackage sendPackage) {
+        return this.sendPackageRepository.saveAndFlush(sendPackage);
     }
 
     @Override

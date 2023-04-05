@@ -8,8 +8,8 @@ import java.util.List;
 public interface SendPackageDao {
 
 
-    SendPackage create(SendPackageDTO sendPackageDTO );
-    SendPackageDTO update(SendPackageDTO sendPackageDTO);
+    SendPackage create(SendPackage sendPackage );
+    SendPackage update(SendPackage sendPackage);
     Boolean delete(Integer id);
     List<SendPackage> getSendPackagesAll();
     SendPackage getSendPackage(Integer id);

@@ -20,7 +20,7 @@ public interface PackageDAO {
 
     Boolean deletePackages( Integer Id);
 
-    Packages UpdateEmployee( Packages packages );
+    Packages UpdatePackages( Packages packages );
 
 
 }

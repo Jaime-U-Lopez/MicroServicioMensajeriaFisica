@@ -25,7 +25,7 @@ public class Person implements Serializable {
         this.lastName = lastName;
     }
 
-    public long getCedula() {
+    public Integer getCedula() {
         return cedula;
     }
 

@@ -51,8 +51,8 @@ public class PackageReposImple implements PackageDAO {
     }
 
     @Override
-    public Packages UpdateEmployee(Packages packages) {
-        return null;
+    public Packages UpdatePackages(Packages packages) {
+        return this.packageRepository.saveAndFlush(packages);
     }
 
 

@@ -24,7 +24,7 @@ public class CustomerController {
         this.customerServiceImple = customerServiceImple;
     }
 
-    @GetMapping("costumer")
+    @GetMapping("costumers")
     public List<Customer> getCustomerAll(){
         return this.customerServiceImple.getCustomerAll();
     }
@@ -36,7 +36,7 @@ public class CustomerController {
 
 
 
-    @PostMapping("customer")
+    @PostMapping("customers")
     public ResponseEntity<Customer> create(@RequestBody Customer customer){
 
         Customer customerCreate = this.customerServiceImple.create(customer);
@@ -45,11 +45,20 @@ public class CustomerController {
     }
 
 
-    @DeleteMapping("customer/{id}")
+    @DeleteMapping("customers/{id}")
     public Boolean delete(@PathVariable Integer cedula ){
 
         return this.customerServiceImple.delete(cedula);
     }
 
+
+
+    @PutMapping("customers")
+    public ResponseEntity<Customer> Update(@RequestBody Customer customer){
+
+        Customer customerUpdate = this.customerServiceImple.updateCustomer(customer);
+        return ResponseEntity.status(HttpStatus.CREATED).body(customerUpdate);
+
+    }
 
 }

@@ -1,11 +1,11 @@
 package com.mensajeria.ServicioMensajeria.Service;
 
+import com.mensajeria.ServicioMensajeria.Model.Customer;
 import com.mensajeria.ServicioMensajeria.Model.Employee;
 
 import java.util.List;
 
 public interface EmployeeService {
-
 
 
     Employee create(Employee employee );
@@ -16,6 +16,7 @@ public interface EmployeeService {
 
     Boolean delete(Integer cedula);
 
+    Employee updateEmployee(Employee employee);
 
 
 

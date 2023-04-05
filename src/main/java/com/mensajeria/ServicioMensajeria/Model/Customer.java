@@ -23,13 +23,12 @@ public class Customer extends Person  implements Serializable {
     public Customer(){};
 
 
-    public Customer(Integer cedula, String name, String lastName, long celular, String correoElectronico, String direccionResidencia, String ciudad, List<SendPackage> sendPackages) {
+    public Customer(Integer cedula, String name, String lastName, long celular, String correoElectronico, String direccionResidencia, String ciudad) {
         super(cedula, name, lastName);
         this.celular = celular;
         this.correoElectronico = correoElectronico;
         this.direccionResidencia = direccionResidencia;
         this.ciudad = ciudad;
-        this.sendPackages = sendPackages;
     }
 
 

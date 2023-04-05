@@ -1,9 +1,12 @@
 package com.mensajeria.ServicioMensajeria.Service;
 
 
+import com.mensajeria.ServicioMensajeria.Exception.ExcepcionPackage;
+import com.mensajeria.ServicioMensajeria.Model.Employee;
 import com.mensajeria.ServicioMensajeria.Model.Packages;
 import com.mensajeria.ServicioMensajeria.Model.SendPackage;
 import com.mensajeria.ServicioMensajeria.Repository.PackageReposImple;
+import com.mensajeria.ServicioMensajeria.Util.UpdateFieldUtil;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,16 +30,20 @@ public class PackageServiceImple implements PackageService {
     }
 
     @Override
-    public List<Packages> getCustomerAll() {
+    public List<Packages> getPackagesAll() {
 
-        return this.packageReposImple.getPackagesAll();
+        Optional<List<Packages>> packagesList= Optional.ofNullable(this.packageReposImple.getPackagesAll());
+
+        if (!packagesList.isPresent()){
+            throw  new RuntimeException("The SendPackage not existed in database");
+        }
+        return packagesList.get();
     }
 
     @Override
-    public Packages getCustomer( Integer id) {
+    public Packages getPackages( Integer numeroGuia) {
 
-
-        Optional<Packages> packages= Optional.ofNullable(this.packageReposImple.getPackages(id));
+        Optional<Packages> packages= Optional.ofNullable(this.packageReposImple.getPackages(numeroGuia));
 
         if (!packages.isPresent()){
             throw  new RuntimeException("The SendPackage not existed in database");
@@ -47,16 +54,36 @@ public class PackageServiceImple implements PackageService {
     }
 
     @Override
-    public Boolean delete(Integer cedula) {
+    public Boolean delete(Integer numeroGuia) {
 
-        Optional<Boolean> customer = Optional.ofNullable(this.packageReposImple.deletePackages(cedula));
+        Optional<Boolean> packages = Optional.ofNullable(this.packageReposImple.deletePackages(numeroGuia));
 
-        if (!customer.isPresent()) {
-            throw new RuntimeException("The Employee  not existed in database");
+        if (!packages.isPresent()) {
+            throw new RuntimeException("The Packages  not existed in database");
         }
 
         return true;
 
 
+    }
+
+    @Override
+    public Packages updatePackages(Packages packages) {
+        Integer id= packages.getId();
+        Optional<Packages> packagesOptional=Optional.ofNullable(this.packageReposImple.getPackages(id));
+
+        if(!packagesOptional.isPresent()){
+            throw new ExcepcionPackage("No se pudo realizar el update del package, no existe en la base de datos");
+        }
+
+
+        packagesOptional.ifPresent(c->{
+
+            UpdateFieldUtil.updateFieldInteger(packages.getPesoPaquete(), c::setPesoPaquete );
+
+            this.packageReposImple.UpdatePackages(c);
+        });
+
+        return packagesOptional.get();
     }
 }

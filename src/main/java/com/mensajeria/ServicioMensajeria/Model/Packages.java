@@ -1,6 +1,7 @@
 package com.mensajeria.ServicioMensajeria.Model;
 
 
+import io.swagger.models.auth.In;
 import org.springframework.core.serializer.Serializer;
 
 import javax.persistence.*;
@@ -19,10 +20,10 @@ public class Packages implements Serializable {
 
     @Enumerated(EnumType.STRING)
     private TypePackageEnum typePackage;
-    private Double pesoPaquete;
+    private Integer pesoPaquete;
     private int valorPaquete;
 
-    public Packages(int id, TypePackageEnum typePackage, Double pesoPaquete, int valorPaquete) {
+    public Packages(int id, TypePackageEnum typePackage, Integer pesoPaquete, int valorPaquete) {
         this.id = id;
         this.typePackage = typePackage;
         this.pesoPaquete = pesoPaquete;
@@ -41,11 +42,11 @@ public class Packages implements Serializable {
         this.typePackage = typePackage;
     }
 
-    public Double getPesoPaquete() {
+    public Integer getPesoPaquete() {
         return pesoPaquete;
     }
 
-    public void setPesoPaquete(Double pesoPaquete) {
+    public void setPesoPaquete(Integer pesoPaquete) {
         this.pesoPaquete = pesoPaquete;
     }
 

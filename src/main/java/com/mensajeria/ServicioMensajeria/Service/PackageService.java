@@ -10,11 +10,15 @@ public interface PackageService {
 
     Packages create(Packages packages );
 
-    List<Packages> getCustomerAll();
+    List<Packages> getPackagesAll();
 
-    Packages getCustomer(Integer id);
+    Packages getPackages(Integer numeroGuia);
 
-    Boolean delete(Integer cedula);
+    Boolean delete(Integer numeroGuia);
+
+
+    Packages updatePackages(Packages packages);
+
 
 
 }

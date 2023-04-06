@@ -10,11 +10,11 @@ public interface CustomerDAO {
 
     public Customer create(Customer customer);
 
-    public boolean delete(Integer id);
+    public boolean delete(Integer cedula);
 
     public List<Customer> getCustomersAll();
 
-    public Customer getCustomer(Integer id);
+    public Customer getCustomer(Integer cedula);
 
     public boolean UpdateCustomer(Customer customer);
 

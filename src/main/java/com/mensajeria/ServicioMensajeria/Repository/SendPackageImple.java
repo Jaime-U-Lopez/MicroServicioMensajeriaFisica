@@ -15,8 +15,12 @@ import java.util.stream.Collectors;
 @Repository
 public class SendPackageImple implements SendPackageDao {
 
-    @Autowired
+
     private SendPackageRepository sendPackageRepository;
+    @Autowired
+    public SendPackageImple(SendPackageRepository sendPackageRepository) {
+        this.sendPackageRepository = sendPackageRepository;
+    }
 
     public SendPackageImple(){}
 

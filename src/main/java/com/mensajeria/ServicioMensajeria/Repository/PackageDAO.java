@@ -12,7 +12,7 @@ import java.util.List;
 public interface PackageDAO {
 
 
-    Packages create(Packages packages);
+    Packages createPackage(Packages packages);
 
     List<Packages> getPackagesAll();
 

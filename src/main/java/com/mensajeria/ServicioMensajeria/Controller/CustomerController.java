@@ -45,10 +45,23 @@ public class CustomerController {
     }
 
 
-    @DeleteMapping("customers/{id}")
-    public Boolean delete(@PathVariable Integer cedula ){
 
-        return this.customerServiceImple.delete(cedula);
+
+    @DeleteMapping("costumer/{id}")
+    public ResponseEntity<String> delete(@PathVariable Integer id){
+
+        Boolean deleted =this.customerServiceImple.delete(id);
+
+        if (deleted) {
+            String messaje = "El empleado con cedula " + id + " fue eliminado con exito !";
+            return ResponseEntity.ok(messaje);
+
+        } else {
+            String messaje = "El empleado con cedula " + id + " no fue eliminado, valide la cedula ingresada, no  existe en la base de datos";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(messaje);
+        }
+
+
     }
 
 

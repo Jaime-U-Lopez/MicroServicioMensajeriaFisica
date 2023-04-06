@@ -1,21 +1,19 @@
 package com.mensajeria.ServicioMensajeria.Model;
 
-public  enum TypePackageEnum {
+public enum TypeEmployeeEnum {
 
-    LIVIANO("LIVIANO"),
-    MEDIANO("MEDIANO"),
-    GRANDE("GRANDE");
+    CONTADOR("CONTADOR"),
+    REPARTIDOR("REPARTIDOR"),
+    COORDINADOR("COORDINADOR");
 
     private final String name;
 
-    TypePackageEnum(String name) {
+    TypeEmployeeEnum(String name) {
         this.name = name;
     }
 
     public String getName() {
         return name;
     }
-
-
 
 }

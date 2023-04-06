@@ -40,19 +40,20 @@ public class EmployeeController {
         return this.employeeServiceImple.getEmployee(id);
     }
 
-    @DeleteMapping("employees/{id}")
+
+
+
+    @DeleteMapping("employees/{cedula}")
     public ResponseEntity<String> delete(@PathVariable Integer cedula) {
 
         Boolean deleted = this.employeeServiceImple.delete(cedula);
 
-
         if (deleted) {
-
-            String messaje = "El empleado con cedula " + cedula + "fue eliminado con exito";
+            String messaje = "El empleado con cedula " + cedula + " fue eliminado con exito !";
             return ResponseEntity.ok(messaje);
 
         } else {
-            String messaje = "El empleado con cedula " + cedula + "no fue eliminado, valide la cedula ingresada, no  existe en la base de datos";
+            String messaje = "El empleado con cedula " + cedula + " no fue eliminado, valide la cedula ingresada, no  existe en la base de datos";
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(messaje);
         }
 

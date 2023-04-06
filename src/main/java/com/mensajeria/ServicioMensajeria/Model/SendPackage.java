@@ -22,33 +22,122 @@ public class SendPackage implements Serializable {
     private Customer customer;
     @OneToOne
     private Packages packages;
-
-
     private long celularPersonaRecibe;
     private String nombrePersonaRecibe;
     private String horaEntrega;
-    private int valorEnvio;
+    private Integer valorEnvio;
+    private Integer cedula;
 
     @Enumerated(EnumType.STRING)
     private StateSendPackageEnum estadoEnvio;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "adressSendComp")
+    @OneToOne
+    @JoinColumn(name = "AdressSendComp")
     @JsonIgnoreProperties("sendPackage")
-    private AdressSendComp adress_send;
+    private AdressSendComp adressSend;
 
-    public SendPackage( Customer customer, Packages packages, int valorEnvio, long celularPersonaRecibe, String nombrePersonaRecibe, String horaEntrega, StateSendPackageEnum estadoEnvio, AdressSendComp adress_send) {
+    public SendPackage() {
+    }
+
+
+    public SendPackage(Customer customer, Packages packages, Integer valorEnvio, long celularPersonaRecibe, String nombrePersonaRecibe, StateSendPackageEnum estadoEnvio, AdressSendComp adressSend) {
 
         this.customer = customer;
         this.packages = packages;
         this.valorEnvio = valorEnvio;
         this.celularPersonaRecibe = celularPersonaRecibe;
         this.nombrePersonaRecibe = nombrePersonaRecibe;
-        this.horaEntrega = horaEntrega;
         this.estadoEnvio = estadoEnvio;
-        this.adress_send = adress_send;
+        this.adressSend = adressSend;
     }
 
+    public void setValorEnvio(Integer valorEnvio) {
+        this.valorEnvio = valorEnvio;
+    }
+
+    public Integer getCedula() {
+        return cedula;
+    }
+
+    public void setCedula(Integer cedula) {
+        this.cedula = cedula;
+    }
+
+    public void setAdressSend(AdressSendComp adressSend) {
+        this.adressSend = adressSend;
+    }
+
+    public Integer getNumeroGuia() {
+        return numeroGuia;
+    }
+
+    public void setNumeroGuia(Integer numeroGuia) {
+        this.numeroGuia = numeroGuia;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public Packages getPackages() {
+        return packages;
+    }
+
+    public void setPackages(Packages packages) {
+        this.packages = packages;
+    }
+
+    public long getCelularPersonaRecibe() {
+        return celularPersonaRecibe;
+    }
+
+    public void setCelularPersonaRecibe(long celularPersonaRecibe) {
+        this.celularPersonaRecibe = celularPersonaRecibe;
+    }
+
+    public String getNombrePersonaRecibe() {
+        return nombrePersonaRecibe;
+    }
+
+    public void setNombrePersonaRecibe(String nombrePersonaRecibe) {
+        this.nombrePersonaRecibe = nombrePersonaRecibe;
+    }
+
+    public String getHoraEntrega() {
+        return horaEntrega;
+    }
+
+    public void setHoraEntrega(String horaEntrega) {
+        this.horaEntrega = horaEntrega;
+    }
+
+    public Integer getValorEnvio() {
+        return valorEnvio;
+    }
+
+    public void setValorEnvio(int valorEnvio) {
+        this.valorEnvio = valorEnvio;
+    }
+
+    public StateSendPackageEnum getEstadoEnvio() {
+        return estadoEnvio;
+    }
+
+    public void setEstadoEnvio(StateSendPackageEnum estadoEnvio) {
+        this.estadoEnvio = estadoEnvio;
+    }
+
+    public AdressSendComp getAdressSend() {
+        return adressSend;
+    }
+
+    public void setAdress_send(AdressSendComp adress_send) {
+        this.adressSend = adress_send;
+    }
 }
 
 

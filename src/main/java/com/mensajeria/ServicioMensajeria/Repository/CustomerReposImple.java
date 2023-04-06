@@ -33,8 +33,8 @@ public class CustomerReposImple implements CustomerDAO {
     }
 
     @Override
-    public boolean delete(Integer id) {
-        customerRepository.deleteById(id);
+    public boolean delete(Integer cedula) {
+        this.customerRepository.deleteById(cedula);
         return true;
     }
 
@@ -52,13 +52,10 @@ public class CustomerReposImple implements CustomerDAO {
     @Override
     public Customer getCustomer(Integer id) {
 
-        try {
-            Optional<Customer> cliente = this.customerRepository.findById(id);
-            return cliente.get();
-        } catch (Exception e) {
-            throw new RuntimeException("El cliente no existe en la base de datos");
+        Optional<Customer> customer=  this.customerRepository.findById(id);
 
-        }
+        return customer.get();
+
 
     }
 

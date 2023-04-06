@@ -11,29 +11,33 @@ public class Employee extends Person implements Serializable {
     private static final long serialVersionUID = 1L;
 
 
-
     @Enumerated(EnumType.STRING)
-    private TypeEmpleoyerEnum typeEmpleoyer;
+    private TypeEmployeeEnum typeEmpleoyer;
 
-    private long celular;
+    private long numeroCelular;
     private String correoElectronico;
     private String direccionResidencia;
     private String ciudad;
     private Date antiguedad;
-    @Column(name="tipo_sangre_RH")
+    @Column(name = "tipo_sangre_RH")
     private String tipoSangreRH;
 
-    public Employee(Integer cedula, String name, String lastName, Date antiguedad, String tipoSangreRH, TypeEmpleoyerEnum typeEmpleoyer, long celular, String correoElectronico, String direccionResidencia, String ciudad) {
+    public Employee() {
+    };
+
+
+
+
+    public Employee(Integer cedula, String name, String lastName, Date antiguedad, String tipoSangreRH, TypeEmployeeEnum typeEmpleoyer, long celular, String correoElectronico, String direccionResidencia, String ciudad) {
         super(cedula, name, lastName);
         this.antiguedad = antiguedad;
         this.tipoSangreRH = tipoSangreRH;
         this.typeEmpleoyer = typeEmpleoyer;
-        this.celular = celular;
+        this.numeroCelular = celular;
         this.correoElectronico = correoElectronico;
         this.direccionResidencia = direccionResidencia;
         this.ciudad = ciudad;
     }
-
 
 
     public Date getAntiguedad() {
@@ -52,20 +56,20 @@ public class Employee extends Person implements Serializable {
         this.tipoSangreRH = tipoSangreRH;
     }
 
-    public TypeEmpleoyerEnum getTypeEmpleoyer() {
+    public TypeEmployeeEnum getTypeEmpleoyer() {
         return typeEmpleoyer;
     }
 
-    public void setTypeEmpleoyer(TypeEmpleoyerEnum typeEmpleoyer) {
+    public void setTypeEmpleoyer(TypeEmployeeEnum typeEmpleoyer) {
         this.typeEmpleoyer = typeEmpleoyer;
     }
 
     public long getCelular() {
-        return celular;
+        return numeroCelular;
     }
 
-    public void setCelular(long celular) {
-        this.celular = celular;
+    public void setCelular(long numeroCelular) {
+        this.numeroCelular = numeroCelular;
     }
 
     public String getCorreoElectronico() {

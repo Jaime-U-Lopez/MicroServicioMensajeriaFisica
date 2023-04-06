@@ -7,6 +7,8 @@ import com.mensajeria.ServicioMensajeria.Model.Packages;
 import com.mensajeria.ServicioMensajeria.Model.SendPackage;
 import com.mensajeria.ServicioMensajeria.Repository.PackageReposImple;
 import com.mensajeria.ServicioMensajeria.Util.UpdateFieldUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +19,7 @@ public class PackageServiceImple implements PackageService {
 
     private PackageReposImple packageReposImple;
 
+    @Autowired
     public PackageServiceImple(PackageReposImple packageReposImple) {
         this.packageReposImple = packageReposImple;
     }
@@ -26,7 +29,14 @@ public class PackageServiceImple implements PackageService {
 
     @Override
     public Packages create(Packages packages) {
-        return this.packageReposImple.create(packages);
+
+        Optional<Packages>packagesOptional=Optional.of(this.packageReposImple.createPackage(packages));
+
+        if (!packagesOptional.isPresent()){
+            throw new ExcepcionPackage("El paquete no se pudo crear valide la información ingresa.");
+        }
+
+        return packagesOptional.get();
     }
 
     @Override
@@ -41,15 +51,22 @@ public class PackageServiceImple implements PackageService {
     }
 
     @Override
-    public Packages getPackages( Integer numeroGuia) {
+    public Packages getPackages( Integer id) {
 
-        Optional<Packages> packages= Optional.ofNullable(this.packageReposImple.getPackages(numeroGuia));
 
-        if (!packages.isPresent()){
-            throw  new RuntimeException("The SendPackage not existed in database");
+        try {
+            Optional<Packages> packages= Optional.of(this.packageReposImple.getPackages(id));
+            if (!packages.isPresent()|| packages.isEmpty()){
+                throw  new ExcepcionPackage("The SendPackage not existed in database");
+            }
+            return packages.get();
+        }catch (ExcepcionPackage e){
+            throw  new ExcepcionPackage("The  Id no existe en la base de datos ");
+        }catch (EmptyResultDataAccessException e) {
+            throw new ExcepcionPackage("The ID does not exist in the database");
         }
 
-        return packages.get();
+
 
     }
 
@@ -80,6 +97,8 @@ public class PackageServiceImple implements PackageService {
         packagesOptional.ifPresent(c->{
 
             UpdateFieldUtil.updateFieldInteger(packages.getPesoPaquete(), c::setPesoPaquete );
+            UpdateFieldUtil.updateFieldInteger(packages.getValorPaquete(), c::setValorPaquete );
+            UpdateFieldUtil.updateFieldNullEmptyString(packages.getTypePackage(), c::setTypePackage);
 
             this.packageReposImple.UpdatePackages(c);
         });

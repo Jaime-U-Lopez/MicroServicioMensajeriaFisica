@@ -25,7 +25,7 @@ public class PackageReposImple implements PackageDAO {
     public PackageReposImple(){};
 
     @Override
-    public Packages create(Packages packages) {
+    public Packages createPackage(Packages packages) {
         return this.packageRepository.save(packages);
     }
 

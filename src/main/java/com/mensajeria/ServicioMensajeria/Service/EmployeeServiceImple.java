@@ -6,6 +6,7 @@ import com.mensajeria.ServicioMensajeria.Model.Customer;
 import com.mensajeria.ServicioMensajeria.Model.Employee;
 import com.mensajeria.ServicioMensajeria.Repository.EmployeeReposImple;
 import com.mensajeria.ServicioMensajeria.Util.UpdateFieldUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,7 @@ public class EmployeeServiceImple implements EmployeeService {
 
     private EmployeeReposImple employeeReposImple;
 
+    @Autowired
     public EmployeeServiceImple(EmployeeReposImple employeeReposImple) {
         this.employeeReposImple = employeeReposImple;
     }
@@ -30,6 +32,12 @@ public class EmployeeServiceImple implements EmployeeService {
 
     @Override
     public Employee create(Employee employee) {
+
+        Optional<Employee> validacionEmployeeExistencia= Optional.of(this.employeeReposImple.create(employee));
+        if(!validacionEmployeeExistencia.isPresent()){
+            throw new ExcepcionEmployee("The employee could not be created, validate the data entered and that the ID no longer exists in the database");
+        }
+
         return this.employeeReposImple.create(employee);
     }
 
@@ -40,7 +48,7 @@ public class EmployeeServiceImple implements EmployeeService {
 
         if (!employeeOptional.isPresent()){
 
-            throw new ExcepcionEmployee("No existen empleados en la base de datos para mostrar ");
+            throw new ExcepcionEmployee("There are no employees in the database to display ");
 
         }
 
@@ -58,23 +66,16 @@ public class EmployeeServiceImple implements EmployeeService {
 
         return employee.get();
 
-
-
-
     }
 
     @Override
     public Boolean delete(Integer cedula) {
 
         Optional<Boolean> customer = Optional.ofNullable(this.employeeReposImple.deleteEmployee(cedula));
-
         if (!customer.isPresent()) {
             throw new RuntimeException("The Employee  not existed in database");
         }
-
         return true;
-
-
     }
 
     @Override
@@ -84,11 +85,10 @@ public class EmployeeServiceImple implements EmployeeService {
         Optional<Employee> employeeOptional= Optional.ofNullable(this.employeeReposImple.getEmployee(idCedula));
 
         if(!employeeOptional.isPresent()){
-            throw new ExcepcionEmployee("El empleado no se pudo actualizar, no existe el id en la base de datos");
+            throw new ExcepcionEmployee("The employee could not be updated, the id does not exist in the database");
         }
 
         employeeOptional.ifPresent(e -> {
-
             UpdateFieldUtil.updateFieldNullEmptyString(employee.getName(), e::setName);
             UpdateFieldUtil.updateFieldNullEmptyString(employee.getLastName(), e::setLastName);
             UpdateFieldUtil.updateFieldNullEmptyString(employee.getCiudad(), e::setCiudad);

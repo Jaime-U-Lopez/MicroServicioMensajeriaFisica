@@ -1,9 +1,6 @@
 package com.mensajeria.ServicioMensajeria.Model;
 
 
-import io.swagger.models.auth.In;
-import org.springframework.core.serializer.Serializer;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -14,31 +11,37 @@ public class Packages implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)
     private Integer id;
-
-    @Enumerated(EnumType.STRING)
-    private TypePackageEnum typePackage;
+    private String typePackage;
     private Integer pesoPaquete;
-    private int valorPaquete;
+    private Integer valorPaquete;
 
-    public Packages(int id, TypePackageEnum typePackage, Integer pesoPaquete, int valorPaquete) {
-        this.id = id;
+    public Packages() {
+    }
+
+
+    public Packages(String typePackage, Integer pesoPaquete, Integer valorPaquete) {
+
         this.typePackage = typePackage;
         this.pesoPaquete = pesoPaquete;
         this.valorPaquete = valorPaquete;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public TypePackageEnum getTypePackage() {
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getTypePackage() {
         return typePackage;
     }
 
-    public void setTypePackage(TypePackageEnum typePackage) {
+    public void setTypePackage(String typePackage) {
         this.typePackage = typePackage;
     }
 
@@ -50,11 +53,11 @@ public class Packages implements Serializable {
         this.pesoPaquete = pesoPaquete;
     }
 
-    public int getValorPaquete() {
+    public Integer getValorPaquete() {
         return valorPaquete;
     }
 
-    public void setValorPaquete(int valorPaquete) {
+    public void setValorPaquete(Integer valorPaquete) {
         this.valorPaquete = valorPaquete;
     }
 }

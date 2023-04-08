@@ -1,6 +1,7 @@
 package com.mensajeria.ServicioMensajeria.Repository;
 
 
+import com.mensajeria.ServicioMensajeria.Exception.ExcepcionEmployee;
 import com.mensajeria.ServicioMensajeria.Model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -11,12 +12,15 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository
-public class EmployeeReposImple implements EmployeeDAO{
+public class EmployeeReposImple implements EmployeeDAO {
 
 
     private EmployeeRepository employeeRepository;
 
-    public EmployeeReposImple(){};
+    public EmployeeReposImple() {
+    }
+
+    ;
 
     @Autowired
     public EmployeeReposImple(EmployeeRepository employeeRepository) {
@@ -41,10 +45,15 @@ public class EmployeeReposImple implements EmployeeDAO{
     }
 
     @Override
-    public Employee getEmployee( Integer id) {
+    public Employee getEmployee(Integer id) {
 
+        try {
             Optional<Employee> employee = this.employeeRepository.findById(id);
             return employee.get();
+        } catch (Exception em) {
+            throw new ExcepcionEmployee("El Employee  con cc " + id + " no existe en la base de datos2");
+        }
+
 
     }
 

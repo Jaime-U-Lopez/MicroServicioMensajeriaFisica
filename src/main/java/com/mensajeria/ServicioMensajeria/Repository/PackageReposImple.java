@@ -1,6 +1,7 @@
 package com.mensajeria.ServicioMensajeria.Repository;
 
 
+import com.mensajeria.ServicioMensajeria.Exception.ExcepcionEmployee;
 import com.mensajeria.ServicioMensajeria.Model.Packages;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -14,7 +15,6 @@ import java.util.stream.Collectors;
 public class PackageReposImple implements PackageDAO {
 
 
-
     private PackageRepository packageRepository;
 
     @Autowired
@@ -22,7 +22,9 @@ public class PackageReposImple implements PackageDAO {
         this.packageRepository = packageRepository;
     }
 
-    public PackageReposImple(){};
+    public PackageReposImple() {
+    }
+
 
     @Override
     public Packages createPackage(Packages packages) {
@@ -31,17 +33,23 @@ public class PackageReposImple implements PackageDAO {
 
     @Override
     public List<Packages> getPackagesAll() {
-       List<Packages> packagesList=  Optional.ofNullable(this.packageRepository.findAll())
+        List<Packages> packagesList = Optional.ofNullable(this.packageRepository.findAll())
                 .map(packages -> packages.stream().collect(Collectors.toList()))
                 .orElse(Collections.emptyList());
         return packagesList;
-
     }
 
     @Override
     public Packages getPackages(Integer id) {
-        Optional<Packages>  packages= this.packageRepository.findById(id);
-        return packages.get();
+
+        try {
+            Optional<Packages> packages = this.packageRepository.findById(id);
+            return packages.get();
+        } catch (Exception e) {
+            throw new ExcepcionEmployee("El Package  con id " + id + " no existe en la base de datos");
+
+        }
+
     }
 
     @Override

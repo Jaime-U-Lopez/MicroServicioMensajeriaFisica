@@ -47,10 +47,10 @@ public class PackageController {
         Boolean deleted = this.packageServiceImple.delete(id);
 
         if (deleted) {
-            String messaje = "El package con numero  " + id + "fue eliminado con exito";
+            String messaje = "El package con numero  " + id + " fue eliminado con exito";
             return ResponseEntity.ok(messaje);
         } else {
-            String messaje = "El package con numero  " + id + "no fue eliminado, valide el numero de guia ingresado no si exista en la base de datos";
+            String messaje = "El package con numero  " + id + " no fue eliminado, valide el numero de guia ingresado no si exista en la base de datos";
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(messaje);
         }
     }

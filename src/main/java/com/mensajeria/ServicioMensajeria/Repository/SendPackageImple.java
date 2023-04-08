@@ -1,9 +1,11 @@
 package com.mensajeria.ServicioMensajeria.Repository;
 
 import com.mensajeria.ServicioMensajeria.Dto.SendPackageDTO;
+import com.mensajeria.ServicioMensajeria.Exception.ExceptionSendPackage;
 import com.mensajeria.ServicioMensajeria.Model.Customer;
 import com.mensajeria.ServicioMensajeria.Model.Packages;
 import com.mensajeria.ServicioMensajeria.Model.SendPackage;
+import com.mensajeria.ServicioMensajeria.Model.StateSendPackageEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -28,7 +30,6 @@ public class SendPackageImple implements SendPackageDao {
     @Override
     public SendPackage create(SendPackage sendPackage) {
         return  this.sendPackageRepository.save(sendPackage);
-
     }
 
     @Override
@@ -55,9 +56,16 @@ public class SendPackageImple implements SendPackageDao {
     @Override
     public SendPackage getSendPackage(Integer id) {
 
-        Optional<SendPackage> sendPackage= this.sendPackageRepository.findById(id);
+        try {
+            Optional<SendPackage> sendPackage= this.sendPackageRepository.findById(id);
+            return sendPackage.get();
+        }catch (Exception e){
+            throw new ExceptionSendPackage("El id del package no existe ");
+        }
 
-        return sendPackage.get();
+    }
 
+    public  List<SendPackage>  findSendPackageByState(StateSendPackageEnum stateSendPackageEnum){
+        return  this.sendPackageRepository.findSendPackageByState( stateSendPackageEnum );
     }
 }

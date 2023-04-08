@@ -6,6 +6,7 @@ import com.mensajeria.ServicioMensajeria.Model.Customer;
 import com.mensajeria.ServicioMensajeria.Model.Employee;
 import com.mensajeria.ServicioMensajeria.Repository.EmployeeReposImple;
 import com.mensajeria.ServicioMensajeria.Util.UpdateFieldUtil;
+import com.mensajeria.ServicioMensajeria.Util.ValidarCorreo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
@@ -32,11 +33,16 @@ public class EmployeeServiceImple implements EmployeeService {
 
     @Override
     public Employee create(Employee employee) {
-
         Optional<Employee> validacionEmployeeExistencia= Optional.of(this.employeeReposImple.create(employee));
+
+         if(!ValidarCorreo.esCorreoValido(employee.getCorreoElectronico())){
+            throw new ExcepcionEmployee("The employee could not be created, validate the el email not is correct ");
+        }
+
         if(!validacionEmployeeExistencia.isPresent()){
             throw new ExcepcionEmployee("The employee could not be created, validate the data entered and that the ID no longer exists in the database");
         }
+
 
         return this.employeeReposImple.create(employee);
     }
@@ -47,9 +53,7 @@ public class EmployeeServiceImple implements EmployeeService {
         Optional<List<Employee>> employeeOptional= Optional.ofNullable(this.employeeReposImple.getEmployeesAll());
 
         if (!employeeOptional.isPresent()){
-
             throw new ExcepcionEmployee("There are no employees in the database to display ");
-
         }
 
         return this.employeeReposImple.getEmployeesAll();

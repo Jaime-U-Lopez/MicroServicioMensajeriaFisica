@@ -2,8 +2,10 @@ package com.mensajeria.ServicioMensajeria.Controller;
 
 import com.mensajeria.ServicioMensajeria.Dto.SendPackageDTO;
 import com.mensajeria.ServicioMensajeria.Dto.SendPackageDTOGet;
+import com.mensajeria.ServicioMensajeria.Dto.SendPackageDTOUpdate;
 import com.mensajeria.ServicioMensajeria.Model.Customer;
 import com.mensajeria.ServicioMensajeria.Model.SendPackage;
+import com.mensajeria.ServicioMensajeria.Model.StateSendPackageEnum;
 import com.mensajeria.ServicioMensajeria.Service.MessagingServiceImple;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,6 +39,13 @@ public class SendPackageController {
     }
 
 
+    @GetMapping("mensajeria/")
+    public List<SendPackage> sendPackageByStateList(@RequestParam("estadoEnvio")StateSendPackageEnum stateSendPackageEnum,@RequestParam("cedulaEmpleado") Integer cedulaEmpleado){
+
+        return this.messagingServiceImple.getSendPackageByState(stateSendPackageEnum, cedulaEmpleado);
+    }
+
+
     @GetMapping("mensajeria/{numeroGuia}")
     public SendPackageDTOGet sendPackageDTO(@PathVariable  Integer numeroGuia){
         return this.messagingServiceImple.getSendPackageById(numeroGuia);
@@ -44,9 +53,10 @@ public class SendPackageController {
 
 
     @PutMapping("mensajeria")
-    public SendPackageDTO sendPackageUpdateState(@RequestBody  SendPackageDTO  sendPackageDTO){
+    public ResponseEntity<String>  sendPackageUpdateState(@RequestBody SendPackageDTOUpdate sendPackageDTOUpdate){
 
-        return this.messagingServiceImple.updateSendPackageStatus(sendPackageDTO);
+        ResponseEntity<String> sendPackageUpdate = this.messagingServiceImple.updateSendPackageStatus(sendPackageDTOUpdate);
+        return ResponseEntity.status(HttpStatus.CREATED).body(sendPackageUpdate.getBody());
     }
 
 

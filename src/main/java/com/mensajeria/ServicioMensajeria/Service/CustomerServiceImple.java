@@ -60,7 +60,7 @@ public class CustomerServiceImple implements CustomerService {
 
     @Override
     public Boolean delete(Integer cedula) {
-        Optional<Boolean> customer = Optional.of(this.customerReposImple.delete(cedula));
+        Optional<Boolean> customer = Optional.ofNullable(this.customerReposImple.delete(cedula));
         if (!customer.isPresent()) {
             throw new RuntimeException("The customer not existed in database");
         }

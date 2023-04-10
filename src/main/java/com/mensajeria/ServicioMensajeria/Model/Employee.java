@@ -1,5 +1,7 @@
 package com.mensajeria.ServicioMensajeria.Model;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -14,10 +16,6 @@ public class Employee extends Person implements Serializable {
     @Enumerated(EnumType.STRING)
     private TypeEmployeeEnum typeEmpleoyer;
 
-    private long numeroCelular;
-    private String correoElectronico;
-    private String direccionResidencia;
-    private String ciudad;
     private Date antiguedad;
     @Column(name = "tipo_sangre_RH")
     private String tipoSangreRH;
@@ -25,20 +23,21 @@ public class Employee extends Person implements Serializable {
     public Employee() {
     };
 
-
-
-
-    public Employee(Integer cedula, String name, String lastName, Date antiguedad, String tipoSangreRH, TypeEmployeeEnum typeEmpleoyer, long celular, String correoElectronico, String direccionResidencia, String ciudad) {
-        super(cedula, name, lastName);
+    @Autowired
+    public Employee(Integer cedula, String name, String lastName, long numeroCelular, String correoElectronico, String direccionResidencia, String ciudad, TypeEmployeeEnum typeEmpleoyer, Date antiguedad, String tipoSangreRH) {
+        super(cedula, name, lastName, numeroCelular, correoElectronico, direccionResidencia, ciudad);
+        this.typeEmpleoyer = typeEmpleoyer;
         this.antiguedad = antiguedad;
         this.tipoSangreRH = tipoSangreRH;
-        this.typeEmpleoyer = typeEmpleoyer;
-        this.numeroCelular = celular;
-        this.correoElectronico = correoElectronico;
-        this.direccionResidencia = direccionResidencia;
-        this.ciudad = ciudad;
     }
 
+    public TypeEmployeeEnum getTypeEmpleoyer() {
+        return typeEmpleoyer;
+    }
+
+    public void setTypeEmpleoyer(TypeEmployeeEnum typeEmpleoyer) {
+        this.typeEmpleoyer = typeEmpleoyer;
+    }
 
     public Date getAntiguedad() {
         return antiguedad;
@@ -55,46 +54,4 @@ public class Employee extends Person implements Serializable {
     public void setTipoSangreRH(String tipoSangreRH) {
         this.tipoSangreRH = tipoSangreRH;
     }
-
-    public TypeEmployeeEnum getTypeEmpleoyer() {
-        return typeEmpleoyer;
-    }
-
-    public void setTypeEmpleoyer(TypeEmployeeEnum typeEmpleoyer) {
-        this.typeEmpleoyer = typeEmpleoyer;
-    }
-
-    public long getCelular() {
-        return numeroCelular;
-    }
-
-    public void setCelular(long numeroCelular) {
-        this.numeroCelular = numeroCelular;
-    }
-
-    public String getCorreoElectronico() {
-        return correoElectronico;
-    }
-
-    public void setCorreoElectronico(String correoElectronico) {
-        this.correoElectronico = correoElectronico;
-    }
-
-    public String getDireccionResidencia() {
-        return direccionResidencia;
-    }
-
-    public void setDireccionResidencia(String direccionResidencia) {
-        this.direccionResidencia = direccionResidencia;
-    }
-
-    public String getCiudad() {
-        return ciudad;
-    }
-
-    public void setCiudad(String ciudad) {
-        this.ciudad = ciudad;
-    }
-
-
 }

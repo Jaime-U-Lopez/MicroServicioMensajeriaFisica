@@ -41,20 +41,22 @@ public class MessagingServiceImple implements MessagingService {
 
     @Override
     public ResponseEntity<String> RegisterSendPackage(SendPackageDTO sendPackageDTO) {
-        //          || (sendPackageDTO.getValorPaquete() != 0)
-        //  || (sendPackageDTO.getPesoPaquete() != 0)
+
 
         if (sendPackageDTO.getCiudadOrigen().equals(null)
                 || sendPackageDTO.getCiudadDestino().equals(null)
                 || sendPackageDTO.getDireccionDestino().equals(null)
                 || sendPackageDTO.getNombrePersonaRecibe().equals(null)
+                || sendPackageDTO.getValorPaquete() == 0
+                || sendPackageDTO.getPesoPaquete() == 0
+
         ) {
             throw new ExceptionSendPackage("Alguno de los campos esta vacio o null, valide nuevamente");
         }
 
 
         Integer cedula = sendPackageDTO.getCedula();
-        Optional<Customer> customerOptional = Optional.of(this.customerServiceImple.getCustomer(cedula));
+        Optional<Customer> customerOptional = Optional.ofNullable(this.customerServiceImple.getCustomer(cedula));
         if (!customerOptional.isPresent()) {
             throw new ExceptionSendPackage("The customer with identification number " + cedula + " must be registered to\n" +
                     "be able to send a package");

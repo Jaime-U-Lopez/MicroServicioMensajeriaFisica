@@ -79,7 +79,7 @@ public class CustomerServiceImple implements CustomerService {
         customerOptiona.ifPresent(c -> {
             UpdateFieldUtil.updateFieldNullEmptyString(customer.getName(), c::setName);
             UpdateFieldUtil.updateFieldNullEmptyString(customer.getLastName(), c::setLastName);
-            UpdateFieldUtil.updateFieldLong(customer.getCelular(), (value) -> c.setCelular(value));
+            UpdateFieldUtil.updateFieldLong(customer.getNumeroCelular(), (value) -> c.setNumeroCelular(value));
             UpdateFieldUtil.updateFieldNullEmptyString(customer.getCiudad(), c::setCiudad);
             UpdateFieldUtil.updateFieldNullEmptyString(customer.getCorreoElectronico(), c::setCorreoElectronico);
             UpdateFieldUtil.updateFieldNullEmptyString(customer.getDireccionResidencia(), c::setDireccionResidencia);

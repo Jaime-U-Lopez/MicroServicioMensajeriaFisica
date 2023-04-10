@@ -11,6 +11,7 @@ public class SendPackageDTOUpdate {
     private StateSendPackageEnum estadoEnvio;
     private TypeEmployeeEnum typeEmployee;
 
+    public SendPackageDTOUpdate(){};
     public SendPackageDTOUpdate(Integer numeroGuia, Integer cedulaEmpleado, StateSendPackageEnum estadoEnvio, TypeEmployeeEnum typeEmployee) {
         this.numeroGuia = numeroGuia;
         this.cedulaEmpleado = cedulaEmpleado;

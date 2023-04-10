@@ -103,7 +103,7 @@ public class EmployeeServiceImple implements EmployeeService {
 
             UpdateFieldUtil.updateFieldDate(employee.getAntiguedad(), e::setAntiguedad);
 
-            UpdateFieldUtil.updateFieldLong(employee.getCelular(), (value) -> e.setCelular(value));
+            UpdateFieldUtil.updateFieldLong(employee.getNumeroCelular(), (value) -> e.setNumeroCelular(value));
 
                 this.employeeReposImple.UpdateEmployee(e);
             });

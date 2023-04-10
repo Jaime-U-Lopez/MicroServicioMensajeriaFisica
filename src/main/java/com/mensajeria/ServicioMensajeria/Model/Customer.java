@@ -10,11 +10,7 @@ public class Customer extends Person  implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Integer id;
-    private long celular;
-    private String correoElectronico;
-    private String direccionResidencia;
-    private String ciudad;
+
 
     @OneToMany
     List<SendPackage> sendPackages;
@@ -22,47 +18,17 @@ public class Customer extends Person  implements Serializable {
 
     public Customer(){};
 
-
-    public Customer(Integer cedula, String name, String lastName, long celular, String correoElectronico, String direccionResidencia, String ciudad) {
-        super(cedula, name, lastName);
-        this.celular = celular;
-        this.correoElectronico = correoElectronico;
-        this.direccionResidencia = direccionResidencia;
-        this.ciudad = ciudad;
+    public Customer(  Integer cedula, String name, String lastName, long numeroCelular, String correoElectronico, String direccionResidencia, String ciudad) {
+        super(cedula, name, lastName, numeroCelular, correoElectronico, direccionResidencia, ciudad);
     }
 
 
 
-
-    public long getCelular() {
-        return celular;
+    public List<SendPackage> getSendPackages() {
+        return sendPackages;
     }
 
-    public void setCelular(long celular) {
-        this.celular = celular;
-    }
-
-    public String getCorreoElectronico() {
-        return correoElectronico;
-    }
-
-    public void setCorreoElectronico(String correoElectronico) {
-        this.correoElectronico = correoElectronico;
-    }
-
-    public String getDireccionResidencia() {
-        return direccionResidencia;
-    }
-
-    public void setDireccionResidencia(String direccionResidencia) {
-        this.direccionResidencia = direccionResidencia;
-    }
-
-    public String getCiudad() {
-        return ciudad;
-    }
-
-    public void setCiudad(String ciudad) {
-        this.ciudad = ciudad;
+    public void setSendPackages(List<SendPackage> sendPackages) {
+        this.sendPackages = sendPackages;
     }
 }

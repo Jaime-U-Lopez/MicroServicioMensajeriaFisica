@@ -15,17 +15,14 @@ Creado por capas como codigo limplio, en el cual se crea las operaciones de Crud
 * Maven como gestor de dependencias
 * Patrones DTO y Diseño DAO para Repository
 
-patron de comportamiento
-Chain of Responsibility
+### Patron de comportamiento Chain of Responsibility
 
 Chain of Responsibility es un patrón de diseño de comportamiento que te permite pasar solicitudes a lo largo de una cadena de manejadores.
 validación de entradas.
 
 
-Patron Structural
-flyweight
+### Patron Structural Flyweight
 
-Permite mantener
 Flyweight es un patrón de diseño estructural que te permite mantener más objetos dentro de la cantidad disponible de RAM compartiendo las partes comunes del estado entre varios objetos en lugar de mantener toda la información en cada objeto.
 
 

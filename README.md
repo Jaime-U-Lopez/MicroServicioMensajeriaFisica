@@ -1,7 +1,14 @@
 
 # Microservicio de Mensajeria Fisica
 
-Creado por capas como codigo limplio, en el cual se crea las operaciones de Crud con la diferentes entidades :
+
+El Microservicio de Mensajería Física es una Api Rest  que proporciona operaciones CRUD (crear, leer, actualizar, eliminar) para las entidades de cliente, reserva y habitación.
+
+
+
+La API del Microservicio de Mensajería Física se puede ver en http://localhost:8080/swagger-ui/index.html#/. Allí, podrás probar y documentar las diferentes operaciones CRUD que se pueden realizar en las entidades de cliente, reserva y habitación.
+
+
 
 * Java 11
 * Spring boot 2.7.11
@@ -32,3 +39,27 @@ Flyweight es un patrón de diseño estructural que te permite mantener más obje
 - Cliente
 - Reserva
 - Habitación
+
+
+Microservicio de Mensajería Física
+
+
+
+Ejemplos de Uso
+Para crear un cliente, envía una petición POST a http://localhost:8080/clientes con un JSON como el siguiente:
+
+
+
+
+
+Para actualizar un cliente, envía una petición PUT a http://localhost:8080/clientes/{id} con un JSON como el siguiente:
+
+json
+Copy code
+{
+  "nombre": "Juan",
+  "apellido": "Pérez",
+  "email": "juan.perez@gmail.com",
+  "telefono": "555-4321"
+}
+Para obtener todos los clientes, envía una petición GET a http://localhost:8080/clientes.

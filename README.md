@@ -66,3 +66,45 @@ Copy code
   "telefono": "555-4321"
 }
 Para obtener todos los clientes, envía una petición GET a http://localhost:8080/clientes.
+
+
+
+
+para crear un empleado 
+{
+
+  "cedula": 1212,
+  "name": "javier enrique",
+  "lastName": "urgo",
+  "numeroCelular": 1212121,
+  "correoElectronico": "pedro@string.com",
+  "direccionResidencia": "los colores",
+  "ciudad": "medellin",
+  "antiguedad": "2022-04-17",
+  "tipoSangreRH": "o+",
+  "typeEmpleoyer": "CONTADOR"
+}
+
+
+respuesta 
+
+	
+Response body
+Download
+{
+  "cedula": 1212,
+  "name": "javier enrique",
+  "lastName": "urgo",
+  "numeroCelular": 1212121,
+  "correoElectronico": "pedro@string.com",
+  "direccionResidencia": "los colores",
+  "ciudad": "medellin",
+  "typeEmpleoyer": "CONTADOR",
+  "antiguedad": "2022-04-17T00:00:00.000+00:00",
+  "tipoSangreRH": "o+"
+  
+  
+  
+}
+
+ { "cedula": 1212, "name": "javier enrique", "lastName": "urgo", "numeroCelular": 1212121, "correoElectronico": "pedro@string.com", "direccionResidencia": "los colores", "ciudad": "medellin", "typeEmpleoyer": "CONTADOR", "antiguedad": "2022-04-17T00:00:00.000+00:00", "tipoSangreRH": "o+" }

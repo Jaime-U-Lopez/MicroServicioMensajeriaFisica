@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -40,6 +41,7 @@ public class CustomerController {
             @ApiResponse(description = "404 - Not Found", responseCode = "404"),
             @ApiResponse(description = "500 - Internal error, please validate the entered fields", responseCode = "500")
     })
+    @PreAuthorize("isAuthenticated()")
     @ApiOperation(value = "Create one customer", notes = "En este endpoind podras realizar la creación de un cliente, de acuerdo a los siguientes parametros ")
     @PostMapping("customers")
     public ResponseEntity<?> create(@RequestBody CustomerDTO customerDTO){
@@ -86,6 +88,7 @@ public class CustomerController {
             @ApiResponse(description = "404 - Not Found", responseCode = "404"),
             @ApiResponse(description = "500 - Internal error, please validate the entered fields", responseCode = "500")
     })
+    @PreAuthorize("isAuthenticated()")
     @ApiOperation(value = "Customer to Update",notes = "En este endpoind podras realizar la actualización  de un cliente  " )
     @PutMapping("customers")
     public ResponseEntity<Customer> Update(@RequestBody @ApiParam(value = "Customer to update   ", example = "123")  Customer customer){
@@ -103,6 +106,7 @@ public class CustomerController {
             @ApiResponse(description = "404 - Not Found", responseCode = "404"),
             @ApiResponse(description = "500 - Internal error, please validate the entered fields", responseCode = "500")
     })
+    @PreAuthorize("isAuthenticated()")
     @ApiOperation(value = "Customer id to Delete ",notes = "En este endpoind podras realizar la eliminación de un cliente por ID" )
     @DeleteMapping("costumer/{id}")
     public ResponseEntity<String> delete(@PathVariable @ApiParam(value = "ID Customer to delete  ", example = "123")  Integer id){

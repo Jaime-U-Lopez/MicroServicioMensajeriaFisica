@@ -16,6 +16,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,7 +40,7 @@ public class SendPackageController {
             @ApiResponse(description = "404 - Not Found", responseCode = "404"),
             @ApiResponse(description = "500 - Internal error, please validate the entered fields", responseCode = "500")
     })
-
+    @PreAuthorize("isAuthenticated()")
     @ApiOperation(value = "Create one  SendPackage ",notes = "En este endpoind podras crear un paquete" )
     @PostMapping("mensajeria")
     public ResponseEntity<String> createMessage(@RequestBody SendPackageDTO sendPackageDTO){

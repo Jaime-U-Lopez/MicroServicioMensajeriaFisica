@@ -18,7 +18,7 @@ public class SendPackage implements Serializable {
     private Integer numeroGuia;
     @ManyToOne
     @JoinColumn(name = "customer")
-    @JsonIgnoreProperties("sendPackage")
+    //@JsonIgnoreProperties("sendPackage")
     private Customer customer;
     @OneToOne
     private Packages packages;

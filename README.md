@@ -13,9 +13,14 @@ El patrón Chain of Responsibility se utiliza para la validación de entradas, l
 En resumen, este microservicio de mensajería física de paquetes es una solución eficiente y escalable para la gestión de la mensajería física de paquetes, con operaciones CRUD, querys personalizados de JPA, patrones de diseño, principios SOLID y patrones de comportamiento.
 
 
-La API 💻 del Microservicio de Mensajería Física se puede ver en https://microserviciomensajeriafisica-production.up.railway.app/swagger-ui/index.html#/. Allí, podrás probar y documentar las diferentes operaciones CRUD que se pueden realizar en las entidades de cliente, reserva y habitación.
+Para acceder a la documentación de la API 💻, haz clic [aquí](https://microserviciomensajeriafisica-production.up.railway.app/swagger-ui/index.html#/)
 
-![image](https://user-images.githubusercontent.com/50783391/233194943-8b5fa737-8ee7-4a30-8ee7-fc961b901dae.png)
+<div style="display:flex;">
+
+<img src="https://user-images.githubusercontent.com/50783391/232255841-ca02df30-398c-4b98-b9eb-098f2adc092c.png" width="200">
+<img src="https://user-images.githubusercontent.com/50783391/233194943-8b5fa737-8ee7-4a30-8ee7-fc961b901dae.png" width="250">
+
+</div >
 
 
 👷 Tecnologias utlizadas
@@ -40,9 +45,14 @@ validación de entradas.
 
 ## 🏛 Entidades :
 
-- Cliente
-- Reserva
-- Habitación
+- Customer
+- Package
+- SendPackage
+
+
+## 🌐 Diagrama de entidades :
+
+![diagrama de clases](https://user-images.githubusercontent.com/50783391/233198946-f2bd91f6-eb1c-4634-ab08-8bd649f5ed55.png)
 
 
 

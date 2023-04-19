@@ -1,5 +1,6 @@
 package com.mensajeria.ServicioMensajeria.Service;
 
+import com.mensajeria.ServicioMensajeria.Dto.CustomerDTO;
 import com.mensajeria.ServicioMensajeria.Exception.ExcepcionCustomer;
 import com.mensajeria.ServicioMensajeria.Model.Customer;
 import com.mensajeria.ServicioMensajeria.Repository.CustomerReposImple;
@@ -27,21 +28,39 @@ public class CustomerServiceImple implements CustomerService {
     }
 
     @Override
-    public Customer create(Customer customer) {
-        String correoElectronico= customer.getCorreoElectronico();
+    public CustomerDTO create(CustomerDTO customerDTO)  throws RuntimeException {
+
+        String correoElectronico= customerDTO.getCorreoElectronico();
+        Integer cedula = customerDTO.getCedula();
+        String name= customerDTO.getName();
+        String lastName= customerDTO.getLastName();
+        Long numeroCelular= customerDTO.getNumeroCelular();
+        validarCliente(cedula,name,lastName,correoElectronico, numeroCelular);
+
+        Optional<CustomerDTO> respuestaRepositoryCustomer = Optional.of(this.customerReposImple.create(customerDTO));
+        if (!respuestaRepositoryCustomer.isPresent()) {
+            throw new ExcepcionCustomer("Customer could not be created");
+        }
+        return this.customerReposImple.create(customerDTO);
+    }
+
+
+
+    private void validarCliente(Integer cedula, String nombre,  String apellido, String correoElectronico,Long numeroCelular) throws RuntimeException {
+        if (apellido == null || nombre == null || cedula < 0  || !(cedula instanceof Integer) || numeroCelular < 0  || !(numeroCelular instanceof Long)) {
+            throw new ExcepcionCustomer("Creacion del  cliente con cc : " + cedula + "no cumple los parametros, de apellido, nombre y cedula en integer");
+        }
         Boolean confirmarEstrucEmail= ValidarCorreo.esCorreoValido(correoElectronico);
         if(!confirmarEstrucEmail){
             throw new ExcepcionCustomer("The email entered does not meet the parameters ");
         }
-        Optional<Customer> respuestaRepositoryCustomer = Optional.of(this.customerReposImple.create(customer));
-        if (!respuestaRepositoryCustomer.isPresent()) {
-            throw new ExcepcionCustomer("Customer could not be created");
+        if (customerReposImple.getCustomer(cedula) != null) {
+            throw new ExcepcionCustomer("El cliente con cedula: " + cedula + "  ya existe en la base de datos");
         }
-        return this.customerReposImple.create(customer);
     }
 
     @Override
-    public List<Customer> getCustomerAll() {
+    public List<Customer> getCustomerAll()  throws RuntimeException{
         Optional<List<Customer>> customerList = Optional.ofNullable(this.customerReposImple.getCustomersAll());
         if (!customerList.isPresent()) {
             throw new ExcepcionCustomer("There are no customers in the database");
@@ -50,28 +69,35 @@ public class CustomerServiceImple implements CustomerService {
     }
 
     @Override
-    public Customer getCustomer(Integer id) {
+    public Customer getCustomer(Integer id)  throws RuntimeException {
         Optional<Customer> customer = Optional.ofNullable(this.customerReposImple.getCustomer(id));
         if (!customer.isPresent()) {
-            throw new RuntimeException("The customer not existed in database");
+            throw new ExcepcionCustomer("The customer " + id + " not existed in database");
         }
         return customer.get();
     }
 
     @Override
-    public Boolean delete(Integer cedula) {
+    public Boolean delete(Integer cedula) throws RuntimeException {
+
+        this.getCustomer(cedula);
         Optional<Boolean> customer = Optional.ofNullable(this.customerReposImple.delete(cedula));
         if (!customer.isPresent()) {
-            throw new RuntimeException("The customer not existed in database");
+            throw new ExcepcionCustomer("The customer "+ cedula + " not existed in database");
         }
         return true;
+
     }
 
     @Override
-    public Customer updateCustomer(Customer customer) {
+    public Customer updateCustomer(Customer customer)  throws RuntimeException {
         Integer idCedula = customer.getCedula();
+        String correoElectronico= customer.getCorreoElectronico();
+        Boolean confirmarEstrucEmail= ValidarCorreo.esCorreoValido(correoElectronico);
+        if(!confirmarEstrucEmail){
+            throw new ExcepcionCustomer("The email entered does not meet the parameters ");
+        }
         Optional<Customer> customerOptiona = Optional.ofNullable(this.customerReposImple.getCustomer(idCedula));
-
         if (!customerOptiona.isPresent()) {
             throw new ExcepcionCustomer("Unable to update customer not existed  in database");
         }

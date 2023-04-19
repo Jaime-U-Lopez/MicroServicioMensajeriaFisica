@@ -1,5 +1,6 @@
 package com.mensajeria.ServicioMensajeria.Service;
 
+import com.mensajeria.ServicioMensajeria.Dto.CustomerDTO;
 import com.mensajeria.ServicioMensajeria.Model.Customer;
 
 import java.util.List;
@@ -7,7 +8,7 @@ import java.util.List;
 public interface CustomerService {
 
 
-    Customer create(Customer customer );
+    CustomerDTO create(CustomerDTO customerDTO );
 
     List<Customer> getCustomerAll();
 
@@ -16,9 +17,5 @@ public interface CustomerService {
     Boolean delete(Integer cedula);
 
     Customer updateCustomer(Customer customer);
-
-
-
-
 
 }

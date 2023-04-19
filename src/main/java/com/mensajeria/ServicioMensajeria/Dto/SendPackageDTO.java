@@ -2,6 +2,7 @@ package com.mensajeria.ServicioMensajeria.Dto;
 
 import com.mensajeria.ServicioMensajeria.Model.StateSendPackageEnum;
 import com.mensajeria.ServicioMensajeria.Model.TypeEmployeeEnum;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
 
@@ -9,37 +10,28 @@ public class SendPackageDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Integer cedula;
-    private String ciudadOrigen;
-    private String ciudadDestino;
-    private String direccionDestino;
-    private String nombrePersonaRecibe;
+    @ApiModelProperty(position = 0)
+    private Integer cedulaCliente ;
+    @ApiModelProperty(position = 5)
     private Long celular;
+    @ApiModelProperty(position = 1)
+    private String ciudadOrigen;
+    @ApiModelProperty(position = 2)
+    private String ciudadDestino;
+    @ApiModelProperty(position = 3)
+    private String direccionDestino;
+    @ApiModelProperty(position = 4)
+    private String nombrePersonaRecibe;
+    @ApiModelProperty(position = 6)
     private Integer valorPaquete;
+    @ApiModelProperty(position = 7)
     private Integer pesoPaquete;
-    private Integer numeroGuia;
-    private StateSendPackageEnum estadoEnvio;
-    private TypeEmployeeEnum  typeEmployee;
-
-    public TypeEmployeeEnum getTypeEmployee() {
-        return typeEmployee;
-    }
-
-    public void setTypeEmployee(TypeEmployeeEnum typeEmployee) {
-        this.typeEmployee = typeEmployee;
-    }
 
     public SendPackageDTO(){};
 
 
-    public SendPackageDTO(Integer numeroGuia, StateSendPackageEnum estadoEnvio){
-        this.numeroGuia=numeroGuia;
-        this.estadoEnvio=estadoEnvio;
-
-    }
-
     public SendPackageDTO(Integer cedula, String ciudadOrigen, String ciudadDestino, String direccionDestino, String nombrePersonaRecibe, Long celular, Integer valorPaquete, Integer pesoPaquete) {
-        this.cedula = cedula;
+        this.cedulaCliente = cedula;
         this.ciudadOrigen = ciudadOrigen;
         this.ciudadDestino = ciudadDestino;
         this.direccionDestino = direccionDestino;
@@ -49,12 +41,20 @@ public class SendPackageDTO implements Serializable {
         this.pesoPaquete = pesoPaquete;
     }
 
-    public Integer getCedula() {
-        return cedula;
+    public Integer getCedulaCliente() {
+        return cedulaCliente;
     }
 
-    public void setCedula(Integer cedula) {
-        this.cedula = cedula;
+    public void setCedulaCliente(Integer cedulaCliente) {
+        this.cedulaCliente = cedulaCliente;
+    }
+
+    public Long getCelular() {
+        return celular;
+    }
+
+    public void setCelular(Long celular) {
+        this.celular = celular;
     }
 
     public String getCiudadOrigen() {
@@ -89,14 +89,6 @@ public class SendPackageDTO implements Serializable {
         this.nombrePersonaRecibe = nombrePersonaRecibe;
     }
 
-    public Long getCelular() {
-        return celular;
-    }
-
-    public void setCelular(Long celular) {
-        this.celular = celular;
-    }
-
     public Integer getValorPaquete() {
         return valorPaquete;
     }
@@ -107,22 +99,6 @@ public class SendPackageDTO implements Serializable {
 
     public Integer getPesoPaquete() {
         return pesoPaquete;
-    }
-
-    public Integer getNumeroGuia() {
-        return numeroGuia;
-    }
-
-    public void setNumeroGuia(Integer numeroGuia) {
-        this.numeroGuia = numeroGuia;
-    }
-
-    public StateSendPackageEnum getEstadoEnvio() {
-        return estadoEnvio;
-    }
-
-    public void setEstadoEnvio(StateSendPackageEnum estadoEnvio) {
-        this.estadoEnvio = estadoEnvio;
     }
 
     public void setPesoPaquete(Integer pesoPaquete) {

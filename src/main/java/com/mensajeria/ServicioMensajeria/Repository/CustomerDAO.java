@@ -1,6 +1,7 @@
 package com.mensajeria.ServicioMensajeria.Repository;
 
 
+import com.mensajeria.ServicioMensajeria.Dto.CustomerDTO;
 import com.mensajeria.ServicioMensajeria.Model.Customer;
 
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.List;
 public interface CustomerDAO {
 
 
-    public Customer create(Customer customer);
+    public CustomerDTO create(CustomerDTO customerDTO);
 
     public boolean delete(Integer cedula);
 

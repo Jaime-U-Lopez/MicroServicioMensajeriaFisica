@@ -18,12 +18,18 @@ public class AdressSendComp implements Serializable {
     private String ciudadOrigen;
     private String direccion;
 
+    @OneToOne
+    private Customer customer;
+
     public AdressSendComp(){};
 
-    public AdressSendComp(String ciudadDestino, String ciudadOrigen, String direccion) {
+    public AdressSendComp( Customer  customer, String ciudadDestino, String ciudadOrigen, String direccion) {
+        this.customer=customer;
         this.ciudadDestino = ciudadDestino;
         this.ciudadOrigen = ciudadOrigen;
         this.direccion = direccion;
+
+
 
     }
 

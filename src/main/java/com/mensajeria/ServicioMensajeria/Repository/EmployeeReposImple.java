@@ -2,6 +2,7 @@ package com.mensajeria.ServicioMensajeria.Repository;
 
 
 import com.mensajeria.ServicioMensajeria.Exception.ExcepcionEmployee;
+import com.mensajeria.ServicioMensajeria.Model.Customer;
 import com.mensajeria.ServicioMensajeria.Model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -39,29 +40,23 @@ public class EmployeeReposImple implements EmployeeDAO {
         List<Employee> employeeList = Optional.ofNullable(this.employeeRepository.findAll())
                 .map(customers -> customers.stream().collect(Collectors.toList()))
                 .orElse(Collections.emptyList());
-
         return employeeList;
-
     }
 
     @Override
     public Employee getEmployee(Integer id) {
 
-        try {
-            Optional<Employee> employee = this.employeeRepository.findById(id);
-            return employee.get();
-        } catch (Exception em) {
-            throw new ExcepcionEmployee("El Employee  con cc " + id + " no existe en la base de datos2");
+        Optional<Employee> employee= this.employeeRepository.findById(id);
+        if (!employee.isPresent()) {
+            return null;
         }
-
-
+        return employee.get();
     }
 
     @Override
     public Boolean deleteEmployee(Integer id) {
         this.employeeRepository.deleteById(id);
         return true;
-
 
     }
 

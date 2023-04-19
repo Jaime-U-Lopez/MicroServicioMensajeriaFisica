@@ -26,7 +26,7 @@ public class SendPackage implements Serializable {
     private String nombrePersonaRecibe;
     private String horaEntrega;
     private Integer valorEnvio;
-    private Integer cedula;
+
 
     @Enumerated(EnumType.STRING)
     private StateSendPackageEnum estadoEnvio;
@@ -51,17 +51,26 @@ public class SendPackage implements Serializable {
         this.adressSend = adressSend;
     }
 
+
+    public static Integer valorEnvio(String typePackage){
+
+        if (typePackage == null ) {
+            throw new IllegalArgumentException("El Peso del package debe ser positivo");
+        } else if (typePackage.equals("GRANDE")) {
+            return 50000;
+        } else if (typePackage.equals("MEDIANO")) {
+            return 40000;
+        }else if (typePackage.equals("LIVIANO")) {
+            return 30000;
+        }else {
+            return 0;
+        }
+    }
+
     public void setValorEnvio(Integer valorEnvio) {
         this.valorEnvio = valorEnvio;
     }
 
-    public Integer getCedula() {
-        return cedula;
-    }
-
-    public void setCedula(Integer cedula) {
-        this.cedula = cedula;
-    }
 
     public void setAdressSend(AdressSendComp adressSend) {
         this.adressSend = adressSend;

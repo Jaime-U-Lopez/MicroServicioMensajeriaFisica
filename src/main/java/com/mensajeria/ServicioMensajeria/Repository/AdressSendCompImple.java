@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class AdressSendCompImple  implements AdressSendCompDAO{
 
-
     private  AdressSendCompRepository adressSendCompRepository;
 
     @Autowired

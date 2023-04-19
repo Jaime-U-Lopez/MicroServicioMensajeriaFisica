@@ -1,5 +1,6 @@
 package com.mensajeria.ServicioMensajeria.Model;
 
+import io.swagger.annotations.ApiModelProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
@@ -11,13 +12,20 @@ public class Person implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @ApiModelProperty(position = 0)
     @Id
     private Integer cedula;
+    @ApiModelProperty(position = 1)
     private String name;
+    @ApiModelProperty(position = 2)
     private String lastName;
+    @ApiModelProperty(position = 3)
     private long numeroCelular;
+    @ApiModelProperty(position = 4)
     private String correoElectronico;
+    @ApiModelProperty(position = 5)
     private String direccionResidencia;
+    @ApiModelProperty(position = 6)
     private String ciudad;
 
 

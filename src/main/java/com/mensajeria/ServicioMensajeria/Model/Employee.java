@@ -1,5 +1,6 @@
 package com.mensajeria.ServicioMensajeria.Model;
 
+import io.swagger.annotations.ApiModelProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
@@ -12,11 +13,12 @@ public class Employee extends Person implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-
+    @ApiModelProperty(position = 9)
     @Enumerated(EnumType.STRING)
     private TypeEmployeeEnum typeEmpleoyer;
-
+    @ApiModelProperty(position = 7)
     private Date antiguedad;
+    @ApiModelProperty(position = 8)
     @Column(name = "tipo_sangre_RH")
     private String tipoSangreRH;
 

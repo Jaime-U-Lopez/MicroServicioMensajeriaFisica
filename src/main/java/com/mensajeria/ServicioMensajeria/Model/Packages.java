@@ -29,6 +29,21 @@ public class Packages implements Serializable {
         this.valorPaquete = valorPaquete;
     }
 
+
+    public static String tipoPaquete(Integer peso ){
+
+        if (peso < 0) {
+            throw new IllegalArgumentException("El Peso del package debe ser positivo");
+        } else if (peso < 2) {
+            return "LIVIANO";
+        } else if (peso >2 && peso <5) {
+            return "MEDIANO";
+        } else {
+            return "GRANDE";
+        }
+    }
+
+
     public Integer getId() {
         return id;
     }

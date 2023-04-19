@@ -7,11 +7,11 @@ import com.mensajeria.ServicioMensajeria.Exception.ExceptionSendPackage;
 import com.mensajeria.ServicioMensajeria.Model.*;
 import com.mensajeria.ServicioMensajeria.Repository.AdressSendCompImple;
 import com.mensajeria.ServicioMensajeria.Repository.SendPackageImple;
-import com.mensajeria.ServicioMensajeria.Util.CalculosPackagesUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,38 +40,31 @@ public class MessagingServiceImple implements MessagingService {
     }
 
     @Override
-    public ResponseEntity<String> RegisterSendPackage(SendPackageDTO sendPackageDTO) {
-
+    public ResponseEntity<String> RegisterSendPackage(SendPackageDTO sendPackageDTO)  throws RuntimeException{
 
         if (sendPackageDTO.getCiudadOrigen().equals(null)
                 || sendPackageDTO.getCiudadDestino().equals(null)
                 || sendPackageDTO.getDireccionDestino().equals(null)
                 || sendPackageDTO.getNombrePersonaRecibe().equals(null)
-                || sendPackageDTO.getValorPaquete() == 0
-                || sendPackageDTO.getPesoPaquete() == 0
-
+                || sendPackageDTO.getValorPaquete() <= 0
+                || sendPackageDTO.getPesoPaquete() <= 0  || sendPackageDTO.getCelular() <= 0
         ) {
             throw new ExceptionSendPackage("Alguno de los campos esta vacio o null, valide nuevamente");
         }
 
+        Optional<Customer> customerOptional = Optional.ofNullable(this.customerServiceImple.getCustomer(sendPackageDTO.getCedulaCliente()));
 
-        Integer cedula = sendPackageDTO.getCedula();
-        Optional<Customer> customerOptional = Optional.ofNullable(this.customerServiceImple.getCustomer(cedula));
-        if (!customerOptional.isPresent()) {
-            throw new ExceptionSendPackage("The customer with identification number " + cedula + " must be registered to\n" +
-                    "be able to send a package");
-        }
 
         Integer peso = sendPackageDTO.getPesoPaquete();
         Integer valorPackages = sendPackageDTO.getValorPaquete();
-        String tipoPaquete = CalculosPackagesUtil.tipoPaquete(peso);
-        Integer valorEnvio = CalculosPackagesUtil.valorEnvio(tipoPaquete.toString());
+        String tipoPaquete = Packages.tipoPaquete(peso);
+        Integer valorEnvio = SendPackage.valorEnvio(tipoPaquete.toString());
         StateSendPackageEnum estadoEnvio = StateSendPackageEnum.RECIBIDO;
 
         Packages packages = new Packages(tipoPaquete, peso, valorPackages);
         this.packageServiceImple.create(packages);
 
-        AdressSendComp adressSendComp = new AdressSendComp(sendPackageDTO.getCiudadDestino(), sendPackageDTO.getCiudadOrigen(), sendPackageDTO.getDireccionDestino());
+        AdressSendComp adressSendComp = new AdressSendComp(customerOptional.get(), sendPackageDTO.getCiudadDestino(), sendPackageDTO.getCiudadOrigen(), sendPackageDTO.getDireccionDestino());
         this.adressSendCompImple.create(adressSendComp);
 
         SendPackage sendPackage = new SendPackage(
@@ -88,37 +81,31 @@ public class MessagingServiceImple implements MessagingService {
         Integer numeroGuia = sendPackage.getNumeroGuia();
         StateSendPackageEnum estadoEnvio1 = sendPackage.getEstadoEnvio();
 
-        ResponseEntity<String> respuesta = ResponseEntity.ok("Numero guia :" + numeroGuia + " Estado Envio " + estadoEnvio);
-
+        ResponseEntity<String> respuesta = ResponseEntity.ok("Numero guia : " + numeroGuia +
+                " /n Estado Envio :" + estadoEnvio);
         return respuesta;
-
     }
 
     @Override
-    public ResponseEntity<String> updateSendPackageStatus(SendPackageDTOUpdate sendPackageDTOUpdate) {
-        //varibles iniciales
+    public ResponseEntity<String> updateSendPackageStatus(SendPackageDTOUpdate sendPackageDTOUpdate)  throws RuntimeException {
+
         Integer cedulaEmpleado = sendPackageDTOUpdate.getCedulaEmpleado();
         Integer numeroGuiaABuscar = sendPackageDTOUpdate.getNumeroGuia();
         StateSendPackageEnum estadoPackage = sendPackageDTOUpdate.getEstadoEnvio();
-        // trayendo los objetos
+
         Optional<Employee> empleadoOptional = Optional.ofNullable(this.employeeServiceImple.getEmployee(cedulaEmpleado));
         Optional<SendPackage> sendPackageOptional = Optional.ofNullable(this.sendPackageImple.getSendPackage(numeroGuiaABuscar));
-
-        if (!empleadoOptional.isPresent() || !sendPackageOptional.isPresent()) {
-            throw new RuntimeException("El package no existe o el empleado no existe  ");
-        }
 
         sendPackageOptional.get().setEstadoEnvio(estadoPackage);
         this.sendPackageImple.update(sendPackageOptional.get());
 
-        //varibles iniciales para validación y logica
 
-        TypeEmployeeEnum tipoEmpleado = sendPackageDTOUpdate.getTypeEmployee();
+        TypeEmployeeEnum tipoEmpleado = empleadoOptional.get().getTypeEmpleoyer();
         TypeEmployeeEnum repartidor = TypeEmployeeEnum.REPARTIDOR;
         TypeEmployeeEnum coordinador = TypeEmployeeEnum.COORDINADOR;
         TypeEmployeeEnum contador = TypeEmployeeEnum.CONTADOR;
 
-        if (tipoEmpleado == repartidor || tipoEmpleado == coordinador) {
+        if (tipoEmpleado.equals(repartidor)   || tipoEmpleado.equals(coordinador)  ) {
 
             StateSendPackageEnum estadoActual = sendPackageOptional.get().getEstadoEnvio();
             StateSendPackageEnum estadoNuevo = sendPackageDTOUpdate.getEstadoEnvio();
@@ -126,22 +113,26 @@ public class MessagingServiceImple implements MessagingService {
             StateSendPackageEnum estadoRuta = StateSendPackageEnum.RUTA;
             StateSendPackageEnum estadoEntregado = StateSendPackageEnum.ENTREGADO;
 
-            if (estadoActual == estadoRecibido && estadoNuevo == estadoRuta) {
+            Date hora = new Date();
+            hora.getTime();
+            String horaEntrega =  String.valueOf(hora.getTime());
+
+            if (estadoActual.equals(estadoRecibido)  && estadoNuevo.equals(estadoRuta) ) {
                 sendPackageOptional.get().setEstadoEnvio(estadoRuta);
                 this.sendPackageImple.create(sendPackageOptional.get());
 
-            } else if (estadoActual == estadoRuta && estadoNuevo == estadoEntregado) {
+            } else if (estadoActual.equals(estadoRuta)   && estadoNuevo.equals(estadoEntregado) ) {
                 sendPackageOptional.get().setEstadoEnvio(estadoEntregado);
+                sendPackageOptional.get().setHoraEntrega(horaEntrega);
                 this.sendPackageImple.create(sendPackageOptional.get());
-            } else if (tipoEmpleado == contador) {
-                throw new RuntimeException("El cargo de contador no puede realizar cambios de estado");
-            } else {
-                throw new ExceptionSendPackage("el cambio de estado no cumple\n" +
-                        "   con las validaciones, valide que esta colcando el estado correcto y que no esta colocando un estado actual");
+            } else  {
+                throw new ExceptionSendPackage("El cambio de estado " + estadoNuevo + " no cumple\n" +
+                        "   con las validaciones, valide que esta colocando el estado correcto,   estado actual en base datos : " +estadoActual  );
+
             }
-
+        } else  {
+            throw new ExceptionSendPackage("El cargo de "+ tipoEmpleado +" no puede realizar cambios de estado");
         }
-
 
         Integer numeroGuiaActual = sendPackageOptional.get().getNumeroGuia();
         StateSendPackageEnum estadoEnvio = sendPackageOptional.get().getEstadoEnvio();
@@ -152,7 +143,7 @@ public class MessagingServiceImple implements MessagingService {
     }
 
     @Override
-    public SendPackageDTOGet getSendPackageById(Integer numeroGuia) {
+    public SendPackageDTOGet getSendPackageById(Integer numeroGuia)  throws RuntimeException {
         StateSendPackageEnum estadoEnvioNuevo = StateSendPackageEnum.RUTA;
 
         Optional<SendPackage> sendPackage = Optional.of(this.sendPackageImple.getSendPackage(numeroGuia));
@@ -205,7 +196,7 @@ public class MessagingServiceImple implements MessagingService {
     }
 
     @Override
-    public Boolean delete(Integer id) {
+    public Boolean delete(Integer id)  throws RuntimeException {
         Optional<Boolean> customer = Optional.ofNullable(this.sendPackageImple.delete(id));
 
         if (!customer.isPresent()) {
@@ -216,7 +207,7 @@ public class MessagingServiceImple implements MessagingService {
     }
 
     @Override
-    public List<SendPackage> getSendPackageAll() {
+    public List<SendPackage> getSendPackageAll()  throws RuntimeException{
         return this.sendPackageImple.getSendPackagesAll();
     }
 }

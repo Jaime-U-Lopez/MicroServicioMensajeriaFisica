@@ -1,6 +1,5 @@
 package com.mensajeria.ServicioMensajeria.Repository;
 
-import com.mensajeria.ServicioMensajeria.Dto.EmployeeDTO;
 import com.mensajeria.ServicioMensajeria.Model.Employee;
 
 import java.util.List;

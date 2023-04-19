@@ -9,14 +9,14 @@ public class SendPackageDTOUpdate {
     private Integer numeroGuia;
     private Integer cedulaEmpleado;
     private StateSendPackageEnum estadoEnvio;
-    private TypeEmployeeEnum typeEmployee;
+
 
     public SendPackageDTOUpdate(){};
-    public SendPackageDTOUpdate(Integer numeroGuia, Integer cedulaEmpleado, StateSendPackageEnum estadoEnvio, TypeEmployeeEnum typeEmployee) {
+    public SendPackageDTOUpdate(Integer numeroGuia, Integer cedulaEmpleado, StateSendPackageEnum estadoEnvio) {
         this.numeroGuia = numeroGuia;
         this.cedulaEmpleado = cedulaEmpleado;
         this.estadoEnvio = estadoEnvio;
-        this.typeEmployee = typeEmployee;
+
     }
 
     public StateSendPackageEnum getEstadoEnvio() {
@@ -37,14 +37,6 @@ public class SendPackageDTOUpdate {
 
     public Integer getCedulaEmpleado() {
         return cedulaEmpleado;
-    }
-
-    public TypeEmployeeEnum getTypeEmployee() {
-        return typeEmployee;
-    }
-
-    public void setTypeEmployee(TypeEmployeeEnum typeEmployee) {
-        this.typeEmployee = typeEmployee;
     }
 
     public void setCedulaEmpleado(Integer cedulaEmpleado) {

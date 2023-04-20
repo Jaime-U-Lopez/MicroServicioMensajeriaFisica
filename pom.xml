@@ -15,8 +15,6 @@
 	<description>Microservicio de mensajeria para realizar las operaciones </description>
 	<properties>
 		<java.version>11</java.version>
-
-
 	</properties>
 	<dependencies>
 		<dependency>

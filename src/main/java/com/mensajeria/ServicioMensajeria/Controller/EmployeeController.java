@@ -12,7 +12,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -38,7 +37,7 @@ public class EmployeeController {
             @ApiResponse(description = "404 - Not Found", responseCode = "404"),
             @ApiResponse(description = "500 - Internal error, please validate the entered fields", responseCode = "500")
     })
-    @PreAuthorize("isAuthenticated()")
+    //@PreAuthorize("isAuthenticated()")
     @ApiOperation(value = "Create one Employee",notes = "En este endpoind podras crear un empleado " )
     @PostMapping("employees")
     public ResponseEntity<Employee> create(@RequestBody Employee employee) {
@@ -86,7 +85,7 @@ public class EmployeeController {
             @ApiResponse(description = "404 - Not Found", responseCode = "404"),
             @ApiResponse(description = "500 - Internal error, please validate the entered fields", responseCode = "500")
     })
-    @PreAuthorize("isAuthenticated()")
+   // @PreAuthorize("isAuthenticated()")
     @ApiOperation(value = "Employee  to Update",notes = "En este endpoind podras realizar la actualización de un empleado" )
     @PutMapping("employees")
     public ResponseEntity<Employee> updateEmployee (@RequestBody @ApiParam(value = "Employee to update ", example = "123")  Employee employee){
@@ -108,7 +107,7 @@ public class EmployeeController {
             @ApiResponse(description = "500 - Internal error, please validate the entered fields", responseCode = "500")
     })
 
-    @PreAuthorize("isAuthenticated()")
+   // @PreAuthorize("isAuthenticated()")
     @ApiOperation(value = "Employee Id to delete ",notes = "En este endpoind podras realizar la eliminación de un employee por ID" )
     @DeleteMapping("employees/{cedula}")
     public ResponseEntity<String> delete(@PathVariable @ApiParam(value = "ID Employee ", example = "123")  Integer cedula) {

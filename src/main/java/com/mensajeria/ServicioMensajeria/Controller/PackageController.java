@@ -13,7 +13,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -38,7 +38,7 @@ public class PackageController {
             @ApiResponse(description = "404 - Not Found", responseCode = "404"),
             @ApiResponse(description = "500 - Internal error, please validate the entered fields", responseCode = "500")
     })
-    @PreAuthorize("isAuthenticated()")
+   // @PreAuthorize("isAuthenticated()")
     @ApiOperation(value = "Create one Package ",notes = "En este endpoind podras crear un paquete" )
     @PostMapping("packages")
     public ResponseEntity<Packages> create(@RequestBody Packages packages) {
@@ -84,7 +84,7 @@ public class PackageController {
             @ApiResponse(description = "404 - Not Found", responseCode = "404"),
             @ApiResponse(description = "500 - Internal error, please validate the entered fields", responseCode = "500")
     })
-    @PreAuthorize("isAuthenticated()")
+   // @PreAuthorize("isAuthenticated()")
     @ApiOperation(value = "Update one Package",notes = "En este endpoind podras realizar la actualización  de un paquete" )
     @PutMapping("packages")
     public ResponseEntity<Packages> updatePackage(@RequestBody @ApiParam(value = "SendPackage ", example = "123") Packages packages) {
@@ -99,7 +99,7 @@ public class PackageController {
             @ApiResponse(description = "404 - Not Found", responseCode = "404"),
             @ApiResponse(description = "500 - Internal error, please validate the entered fields", responseCode = "500")
     })
-    @PreAuthorize("isAuthenticated()")
+  //  @PreAuthorize("isAuthenticated()")
     @ApiOperation(value = "Packages id to delete ",notes = "En este endpoind podras realizar la eliminación de un Paquete  por ID" )
     @DeleteMapping("packages/{id}")
     public ResponseEntity<String> delete(@PathVariable @ApiParam(value = "ID SendPackage ", example = "123") Integer id) {

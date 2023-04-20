@@ -115,10 +115,7 @@
 			<id>central</id>
 			<url>https://repo.maven.apache.org/maven2</url>
 		</repository>
-		<repository>
-			<id>my-repository</id>
-			<url>http://mycompany.com/maven-repo</url>
-		</repository>
+
 
 	</repositories>
 

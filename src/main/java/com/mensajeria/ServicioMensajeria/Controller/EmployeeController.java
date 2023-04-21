@@ -18,7 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("mensajeria/v1/")
-@Api(tags = "Employee", description = "Operation for Employee management")
+@Api(tags = "employees", description = "Operation for Employee management")
 public class EmployeeController {
 
 

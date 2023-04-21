@@ -17,13 +17,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 //import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("mensajeria/v1/")
-@Api(tags = "SendPackage", description = "Operation for SendPackage  management")
+@Api(tags = "SendPackages", description = "Operation for SendPackage  management")
 public class SendPackageController {
 
     private MessagingServiceImple messagingServiceImple;
@@ -40,9 +41,9 @@ public class SendPackageController {
             @ApiResponse(description = "404 - Not Found", responseCode = "404"),
             @ApiResponse(description = "500 - Internal error, please validate the entered fields", responseCode = "500")
     })
-   // @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("isAuthenticated()")
     @ApiOperation(value = "Create one  SendPackage ",notes = "En este endpoind podras crear un paquete" )
-    @PostMapping("mensajeria")
+    @PostMapping("SendPackages")
     public ResponseEntity<String> createMessage(@RequestBody SendPackageDTO sendPackageDTO){
         ResponseEntity<String> sendPackageCreateDto = this.messagingServiceImple.RegisterSendPackage(sendPackageDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(sendPackageCreateDto.getBody());
@@ -58,7 +59,7 @@ public class SendPackageController {
     })
 
     @ApiOperation(value = "Consult all sendPackage",notes = "En este endpoind podras consultar todos los envios " )
-    @GetMapping("mensajeria")
+    @GetMapping("SendPackages")
     public List<SendPackage> sendPackageDTOAll(){
         return this.messagingServiceImple.getSendPackageAll();
     }
@@ -72,7 +73,7 @@ public class SendPackageController {
             @ApiResponse(description = "500 - Internal error, please validate the entered fields", responseCode = "500")
     })
     @ApiOperation(value = "Consult SendPackage for Status",notes = "En este endpoind podras consultar  por estado de envio" )
-    @GetMapping("mensajeria/")
+    @GetMapping("SendPackages/")
     public List<SendPackage> sendPackageByStateList(@RequestParam("estadoEnvio")StateSendPackageEnum stateSendPackageEnum,@RequestParam("cedulaEmpleado") Integer cedulaEmpleado){
 
         return this.messagingServiceImple.getSendPackageByState(stateSendPackageEnum, cedulaEmpleado);
@@ -87,7 +88,7 @@ public class SendPackageController {
             @ApiResponse(description = "500 - Internal error, please validate the entered fields", responseCode = "500")
     })
     @ApiOperation(value = "SendPackage  id to consult",notes = "En este endpoind podras consultar un envio por Guia de paquete y empleado " )
-    @GetMapping("mensajeria/{numeroGuia}")
+    @GetMapping("SendPackages/{numeroGuia}")
     public SendPackageDTOGet sendPackageDTO(@PathVariable  @ApiParam(value = "Tracking number of SendPackage ", example = "123")  Integer numeroGuia){
         return this.messagingServiceImple.getSendPackageById(numeroGuia);
     }
@@ -102,16 +103,12 @@ public class SendPackageController {
     })
 
     @ApiOperation(value = "Update one SendPackage",notes = "En este endpoind podras consultar los paquetes por estado de envio" )
-    @PutMapping("mensajeria")
+    @PutMapping("SendPackages")
     public ResponseEntity<String>  sendPackageUpdateState(@RequestBody  @ApiParam(value = "SendPackage  for status", example = "123") SendPackageDTOUpdate sendPackageDTOUpdate){
 
         ResponseEntity<String> sendPackageUpdate = this.messagingServiceImple.updateSendPackageStatus(sendPackageDTOUpdate);
         return ResponseEntity.status(HttpStatus.CREATED).body(sendPackageUpdate.getBody());
     }
-
-
-
-
 
 
 }

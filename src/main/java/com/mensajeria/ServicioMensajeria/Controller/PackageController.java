@@ -20,7 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("mensajeria/v1/")
-@Api(tags = "Package", description = "Operation for Package  management")
+@Api(tags = "Packages", description = "Operation for Package  management")
 public class PackageController {
 
     private PackageServiceImple packageServiceImple;
@@ -28,7 +28,6 @@ public class PackageController {
     public PackageController(PackageServiceImple packageServiceImple) {
         this.packageServiceImple = packageServiceImple;
     }
-
 
     @ApiResponses(value = {
             @ApiResponse(description = "400 - Bad Request", responseCode = "400"),

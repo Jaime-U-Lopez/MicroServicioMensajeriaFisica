@@ -1,8 +1,5 @@
 package com.mensajeria.ServicioMensajeria.Service;
 
-import com.mensajeria.ServicioMensajeria.Model.MyUserDetails;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.*;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -34,7 +31,7 @@ public class MyUserDetailService implements UserDetailsService {
         String password = users.get(username);
 
         List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+        authorities.add(new SimpleGrantedAuthority("SENSEI"));
 
         return new User(username, password, authorities);
     }

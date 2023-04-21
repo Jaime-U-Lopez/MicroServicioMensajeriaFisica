@@ -2,11 +2,13 @@ package com.mensajeria.ServicioMensajeria.Service;
 
 import com.mensajeria.ServicioMensajeria.Dto.SendPackageDTO;
 import com.mensajeria.ServicioMensajeria.Dto.SendPackageDTOGet;
+import com.mensajeria.ServicioMensajeria.Dto.SendPackageDTOGetAll;
 import com.mensajeria.ServicioMensajeria.Dto.SendPackageDTOUpdate;
 import com.mensajeria.ServicioMensajeria.Exception.ExceptionSendPackage;
 import com.mensajeria.ServicioMensajeria.Model.*;
 import com.mensajeria.ServicioMensajeria.Repository.AdressSendCompImple;
 import com.mensajeria.ServicioMensajeria.Repository.SendPackageImple;
+import com.mensajeria.ServicioMensajeria.Util.SendPackageMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -25,14 +27,17 @@ public class MessagingServiceImple implements MessagingService {
     private AdressSendCompImple adressSendCompImple;
     private PackageServiceImple packageServiceImple;
     private EmployeeServiceImple employeeServiceImple;
+    private SendPackageMapper sendPackageMapper;
+
 
     @Autowired
-    public MessagingServiceImple(SendPackageImple sendPackageImple, CustomerServiceImple customerServiceImple, AdressSendCompImple adressSendCompImple, PackageServiceImple packageServiceImple, EmployeeServiceImple employeeServiceImple) {
+    public MessagingServiceImple( SendPackageMapper sendPackageMapper, SendPackageImple sendPackageImple, CustomerServiceImple customerServiceImple, AdressSendCompImple adressSendCompImple, PackageServiceImple packageServiceImple, EmployeeServiceImple employeeServiceImple) {
         this.sendPackageImple = sendPackageImple;
         this.customerServiceImple = customerServiceImple;
         this.adressSendCompImple = adressSendCompImple;
         this.packageServiceImple = packageServiceImple;
         this.employeeServiceImple = employeeServiceImple;
+        this.sendPackageMapper= sendPackageMapper;
     }
 
 
@@ -185,15 +190,6 @@ public class MessagingServiceImple implements MessagingService {
 
     }
 
-    @Override
-    public List<SendPackage> getSendPackageByRecipient(Customer recipient) {
-        return null;
-    }
-
-    @Override
-    public void notifyRecipient(SendPackage SendPackage) {
-
-    }
 
     @Override
     public Boolean delete(Integer id)  throws RuntimeException {
@@ -207,7 +203,12 @@ public class MessagingServiceImple implements MessagingService {
     }
 
     @Override
-    public List<SendPackage> getSendPackageAll()  throws RuntimeException{
-        return this.sendPackageImple.getSendPackagesAll();
+    public List<SendPackageDTOGetAll> getSendPackageAll()  throws RuntimeException{
+
+        List<SendPackage> sendPackageList= this.sendPackageImple.getSendPackagesAll();
+
+        List<SendPackageDTOGetAll> sendPackageDTOGets=  this.sendPackageMapper.entityListToDtoList(sendPackageList);
+        return sendPackageDTOGets  ;
+
     }
 }

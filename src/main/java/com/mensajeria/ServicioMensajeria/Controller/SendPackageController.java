@@ -2,6 +2,7 @@ package com.mensajeria.ServicioMensajeria.Controller;
 
 import com.mensajeria.ServicioMensajeria.Dto.SendPackageDTO;
 import com.mensajeria.ServicioMensajeria.Dto.SendPackageDTOGet;
+import com.mensajeria.ServicioMensajeria.Dto.SendPackageDTOGetAll;
 import com.mensajeria.ServicioMensajeria.Dto.SendPackageDTOUpdate;
 import com.mensajeria.ServicioMensajeria.Model.Customer;
 import com.mensajeria.ServicioMensajeria.Model.SendPackage;
@@ -60,7 +61,7 @@ public class SendPackageController {
 
     @ApiOperation(value = "Consult all sendPackage",notes = "En este endpoind podras consultar todos los envios " )
     @GetMapping("SendPackages")
-    public List<SendPackage> sendPackageDTOAll(){
+    public List<SendPackageDTOGetAll> sendPackageDTOAll(){
         return this.messagingServiceImple.getSendPackageAll();
     }
 

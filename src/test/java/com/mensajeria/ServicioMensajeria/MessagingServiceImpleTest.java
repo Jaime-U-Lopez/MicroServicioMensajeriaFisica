@@ -12,6 +12,7 @@ import com.mensajeria.ServicioMensajeria.Service.EmployeeServiceImple;
 import com.mensajeria.ServicioMensajeria.Service.MessagingServiceImple;
 import com.mensajeria.ServicioMensajeria.Service.PackageServiceImple;
 
+import com.mensajeria.ServicioMensajeria.Util.SendPackageMapper;
 import org.junit.Rule;
 import org.junit.Before;
 import org.junit.Test;
@@ -43,6 +44,8 @@ public class MessagingServiceImpleTest {
     private AdressSendCompImple adressSendCompImpleMock;
     @Mock
     private PackageServiceImple packageServiceImpleMock;
+    @Mock
+    private SendPackageMapper sendPackageMapper;
 
 
     @Rule
@@ -52,7 +55,7 @@ public class MessagingServiceImpleTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        this.messagingServiceImple = new MessagingServiceImple(sendPackageImpleMock, customerServiceImpleMock, adressSendCompImpleMock, packageServiceImpleMock, employeeServiceImpleMock);
+        this.messagingServiceImple = new MessagingServiceImple(sendPackageMapper,  sendPackageImpleMock, customerServiceImpleMock, adressSendCompImpleMock, packageServiceImpleMock, employeeServiceImpleMock);
     }
 
 

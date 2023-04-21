@@ -23,15 +23,5 @@ public interface MapperObject {
     List<CustomerDTO> entityListToDtoList(List<Customer> entityList);
 
 
-/*
 
-    public interface UserMapper {
-
-        UserDto toDto (User user);
-
-        User toDomain(UserDto userDto);
-    }
-
-
- */
 }

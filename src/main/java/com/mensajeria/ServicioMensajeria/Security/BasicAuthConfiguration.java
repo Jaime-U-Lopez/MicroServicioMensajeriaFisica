@@ -46,7 +46,11 @@ public class BasicAuthConfiguration   {
                 .csrf().disable()
                 .authorizeHttpRequests()
                 .antMatchers("/employees").permitAll()
-                .antMatchers("/customers").hasRole("ADMIN")
+                .antMatchers("/customers").hasRole("READ")
+                .antMatchers(HttpMethod.GET).hasAuthority("READ")
+                .antMatchers(HttpMethod.POST).hasAuthority("WRITE")
+                .antMatchers(HttpMethod.PUT).hasAuthority("WRITE")
+                .antMatchers(HttpMethod.DELETE).hasAuthority("WRITE")
                 .antMatchers(HttpMethod.POST, "/employees").hasAuthority("WRITE_EMPLOYEE")
                 .anyRequest()
                 .authenticated()
@@ -56,7 +60,7 @@ public class BasicAuthConfiguration   {
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .build();
+               .build();
     }
 
     @Bean
@@ -64,12 +68,22 @@ public class BasicAuthConfiguration   {
         InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
         manager.createUser(User.withUsername(username)
                 .password(passwordEncoder().encode(password))
-                .roles("READ")
-                .authorities("WRITE_EMPLOYEE") // Agregar la autoridad "WRITE_EMPLOYEE" al usuario
-                .build()
-        );
+                .roles("All")
+                .authorities("READ","WRITE")
+                .build());
+    manager.createUser( User.withUsername("user")
+                        .password(passwordEncoder().encode("user123"))
+                        .authorities("READ")
+                        .build());
+      manager.createUser( User.withUsername("admin")
+                      .password(passwordEncoder().encode("admin123"))
+                      .authorities("READ","WRITE")
+                      .build());
+
         return manager;
     }
+
+
 
     @Bean
     AuthenticationManager authManager(HttpSecurity http) throws Exception {
@@ -83,6 +97,5 @@ public class BasicAuthConfiguration   {
     PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
-
 
 }

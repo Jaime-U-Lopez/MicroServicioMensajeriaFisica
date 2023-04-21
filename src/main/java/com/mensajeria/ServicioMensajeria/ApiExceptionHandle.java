@@ -7,6 +7,8 @@ import com.mensajeria.ServicioMensajeria.Exception.ExcepcionPackage;
 import com.mensajeria.ServicioMensajeria.Exception.ExceptionSendPackage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -17,8 +19,8 @@ import java.time.ZonedDateTime;
 public class ApiExceptionHandle {
 
 
-    @ExceptionHandler(  value={ ExcepcionCustomer.class, ExceptionSendPackage.class, ExcepcionEmployee.class, ExcepcionPackage.class})
-    public ResponseEntity<Object> handleDataNotFoundException(RuntimeException ex  ) {
+    @ExceptionHandler(  value={ ExcepcionCustomer.class, ExceptionSendPackage.class, ExcepcionEmployee.class, ExcepcionPackage.class , RuntimeException.class  })
+    public ResponseEntity<Object> handleDataNotFoundException(Exception ex  ) {
 
         ApiException apiException = new ApiException(
                 ex.getMessage(),
@@ -26,10 +28,18 @@ public class ApiExceptionHandle {
                 ZonedDateTime.now(ZoneId.of("Z"))
 
         );
-
-        return new ResponseEntity<>(apiException, HttpStatus.BAD_REQUEST);
-
+        return new ResponseEntity<>(apiException, HttpStatus.NOT_FOUND);
     }
 
+
+    @ExceptionHandler(value={AccessDeniedException.class, AuthenticationException.class})
+    public ResponseEntity<Object> handleAccessDeniedException(Exception ex) {
+        ApiException apiException = new ApiException(
+                ex.getMessage(),
+                HttpStatus.UNAUTHORIZED,
+                ZonedDateTime.now(ZoneId.of("Z"))
+        );
+        return new ResponseEntity<>(apiException, HttpStatus.UNAUTHORIZED);
+    }
 
 }

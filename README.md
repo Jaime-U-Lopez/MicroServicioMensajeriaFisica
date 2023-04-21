@@ -55,27 +55,34 @@ validación de entradas.
 ![diagrama de clases](https://user-images.githubusercontent.com/50783391/233198946-f2bd91f6-eb1c-4634-ab08-8bd649f5ed55.png)
 
 
+## 🌐 Diagrama de carpetas  :
+
+![ProyectoIntegradorBack2 drawio (7)](https://user-images.githubusercontent.com/50783391/233716114-ae4d0bfe-d05a-49af-b9f8-6711bfc7d071.png)
 
 
-#### Para crear un Customer, envía una petición PUT :
+
+
+#### Para crear un Customer, envía una petición :
 
 
 {
-  "nombre": "Juan",
+
+   "nombre": "Juan",
   
-  "apellido": "Pérez",
+   "apellido": "Pérez",
   
-  "email": "juan.perez@gmail.com",
+   "email": "juan.perez@gmail.com",
   
-  "telefono": "555-4321"
+   "telefono": "555-4321"
 }
 
 
 
-#### Para crear  un employee , envía una petición PUT :
+#### Para crear  un employee , envía una petición :
 
 
 {
+
 
   "cedula": 1212,
   

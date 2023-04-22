@@ -65,74 +65,49 @@ validación de entradas.
 #### Para crear un Customer, envía una petición :
 
 
-{
-
-   "nombre": "Juan",
-  
-   "apellido": "Pérez",
-  
-   "email": "juan.perez@gmail.com",
-  
-   "telefono": "555-4321"
-}
+	{
+		"nombre": "Juan",
+		"apellido": "Pérez",
+		"email": "juan.perez@gmail.com",
+		"telefono": "555-4321"
+	}
 
 
 
 #### Para crear  un employee , envía una petición :
 
 
-{
-
-
-  "cedula": 1212,
-  
-  "name": "javier enrique",
-  
-  "lastName": "urgo",
-  
-  "numeroCelular": 1212121,
-  
-  "correoElectronico": "pedro@string.com",
-  
-  "direccionResidencia": "los colores",
-  
-  "ciudad": "medellin",
-  
-  "antiguedad": "2022-04-17",
-  
-  "tipoSangreRH": "o+",
-  
-  "typeEmpleoyer": "CONTADOR"
-}
+	{
+		"cedula": 1212,
+		"name": "javier enrique",
+		"lastName": "urgo",
+		"numeroCelular": 1212121,
+		"correoElectronico": "pedro@string.com",
+		"direccionResidencia": "los colores",
+		"ciudad": "medellin",
+		"antiguedad": "2022-04-17",
+		"tipoSangreRH": "o+",
+		"typeEmpleoyer": "CONTADOR"
+	}
 
 
 #### respuesta 
 
 	
-Response body
-{
-  "cedula": 1212,
-  
-  "name": "javier enrique",
-  
-  "lastName": "urgo",
-  
-  "numeroCelular": 1212121,
-  
-  "correoElectronico": "pedro@string.com",
-  
-  "direccionResidencia": "los colores",
-  
-  "ciudad": "medellin",
-  
-  "typeEmpleoyer": "CONTADOR",
-  
-  "antiguedad": "2022-04-17",
-  
-  "tipoSangreRH": "o+"
-  
-  
-  
-}
+Response body : 
+
+	{
+		  "cedula": 1212,
+		  "name": "javier enrique",
+		  "lastName": "urgo",
+		  "numeroCelular": 1212121,
+		  "correoElectronico": "pedro@string.com",
+		  "direccionResidencia": "los colores",
+		  "ciudad": "medellin",
+		  "typeEmpleoyer": "CONTADOR",
+		  "antiguedad": "2022-04-17",
+		  "tipoSangreRH": "o+"
+
+	}
 
  

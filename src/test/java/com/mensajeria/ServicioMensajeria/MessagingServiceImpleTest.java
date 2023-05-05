@@ -58,14 +58,11 @@ public class MessagingServiceImpleTest {
         this.messagingServiceImple = new MessagingServiceImple(sendPackageMapper,  sendPackageImpleMock, customerServiceImpleMock, adressSendCompImpleMock, packageServiceImpleMock, employeeServiceImpleMock);
     }
 
-
-
     @Test(expected = ExceptionSendPackage.class)
     public void testRegisterSendPackage_Create_WithNullFields() throws ExceptionSendPackage {
         SendPackageDTO sendPackageDTO = new SendPackageDTO(1, "Bogotá", "Cra 1 # 2-3", "Juan Perez", "123456",1L, 0, 40);
         messagingServiceImple.RegisterSendPackage(sendPackageDTO);
     }
-
 
     @Test
     public void updateSendPackageStatus_shouldThrowRuntimeExceptionWhenSendPackageNotFound() {
@@ -90,7 +87,6 @@ public class MessagingServiceImpleTest {
 
 
     }
-
 
 
     @Test(expected = RuntimeException.class)
@@ -122,7 +118,7 @@ public class MessagingServiceImpleTest {
         messagingServiceImple.updateSendPackageStatus(sendPackageDTOUpdate);
     }
 
-/*
+
 
     @Test(expected = RuntimeException.class)
     public void testUpdateSendPackageStatus_whitStatusEqual() {
@@ -148,7 +144,7 @@ public class MessagingServiceImpleTest {
     }
 
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void testUpdateSendPackageStatus_InvalidStateChange() {
         SendPackage sendPackage = new SendPackage();
         sendPackage.setNumeroGuia(12345);
@@ -164,56 +160,13 @@ public class MessagingServiceImpleTest {
         sendPackageDTOUpdate.setCedulaEmpleado(123456789);
         sendPackageDTOUpdate.setEstadoEnvio(StateSendPackageEnum.RUTA);
 
-
         messagingServiceImple.updateSendPackageStatus(sendPackageDTOUpdate);
     }
 
 
 
 
-    @Test(expected = ExceptionSendPackage.class)
-    public void getSendPackageById_existingSendPackage_returnsSendPackageDTOGet() {
-        // Arrange
-        Integer numeroGuia = 1234;
 
-        // Act
-        SendPackageDTOGet sendPackageDTOGet = messagingServiceImple.getSendPackageById(numeroGuia);
-
-        // Assert
-        assertNotNull(sendPackageDTOGet);
-        assertEquals("Cédula cliente", sendPackageDTOGet.getCedulaCliente());
-        assertEquals("Nombre remitente", sendPackageDTOGet.getNombreRemitente());
-        assertEquals("Ciudad origen", sendPackageDTOGet.getCiudadOrigen());
-        assertEquals("Ciudad destino", sendPackageDTOGet.getCiudadDestino());
-        assertEquals("Dirección destino", sendPackageDTOGet.getDireccionDestino());
-        assertEquals("Nombre recibe", sendPackageDTOGet.getNombreRecibe());
-        assertEquals("Celular", sendPackageDTOGet.getCelular());
-        assertEquals(100.0, sendPackageDTOGet.getValorDeclaradoPaquete(), 0.0);
-        assertEquals(10.0, sendPackageDTOGet.getPeso(), 0.0);
-        assertEquals(50.0, sendPackageDTOGet.getValorEnvio(), 0.0);
-        assertEquals(StateSendPackageEnum.RUTA, sendPackageDTOGet.getEstadoEnvio());
-    }
-
-    @Test
-    public void getSendPackageById_updateEstadoEnvioToRUTA() {
-        // Arrange
-        Integer numeroGuia = 1234;
-        SendPackage sendPackage = new SendPackage();
-        sendPackage.setEstadoEnvio(StateSendPackageEnum.RUTA);
-        Customer customer = new Customer(1,"44","45",45454L,"45","4545","4545");
-        // Se simula que se obtiene un objeto SendPackage diferente al esperado
-        when(customerServiceImpleMock.getCustomer(Mockito.anyInt())).thenReturn(customer);
-        Mockito.when(sendPackageImpleMock.getSendPackage(numeroGuia)).thenReturn(sendPackage);
-
-        // Act
-        SendPackageDTOGet sendPackageDTOGet = messagingServiceImple.getSendPackageById(numeroGuia);
-
-        // Assert
-        // Se espera que el estado de envío del objeto SendPackage se haya actualizado a RUTA
-        assertEquals(StateSendPackageEnum.RUTA, sendPackage.getEstadoEnvio());
-    }
-
- */
 }
 
 

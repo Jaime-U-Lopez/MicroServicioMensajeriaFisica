@@ -65,7 +65,7 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("API REST  -- SERVICIO MENSAJERIA -- ")
+                .title("API REST  -- SERVICIO MENSAJERIA ULTRA FAST -- ")
                 .description("\uD83D\uDCE6\uD83D\uDE9A With our REST API you will be able to register, query, update, and delete one of these entities:" +
                 "\n"+ " " +
                 "\n"+ " " +

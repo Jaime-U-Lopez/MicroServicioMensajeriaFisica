@@ -14,7 +14,8 @@ public class Packages implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)
     private Integer id;
-    private String typePackage;
+    @Enumerated(EnumType.STRING)
+    private TypePackageEnum typePackage;
     private Integer pesoPaquete;
     private Integer valorPaquete;
 
@@ -22,7 +23,7 @@ public class Packages implements Serializable {
     }
 
 
-    public Packages(String typePackage, Integer pesoPaquete, Integer valorPaquete) {
+    public Packages(TypePackageEnum typePackage, Integer pesoPaquete, Integer valorPaquete) {
 
         this.typePackage = typePackage;
         this.pesoPaquete = pesoPaquete;
@@ -30,16 +31,16 @@ public class Packages implements Serializable {
     }
 
 
-    public static String tipoPaquete(Integer peso ){
+    public static TypePackageEnum tipoPaquete(Integer peso ){
 
         if (peso < 0) {
             throw new IllegalArgumentException("El Peso del package debe ser positivo");
         } else if (peso < 2) {
-            return "LIVIANO";
+            return TypePackageEnum.LIVIANO;
         } else if (peso >2 && peso <5) {
-            return "MEDIANO";
+            return TypePackageEnum.GRANDE;
         } else {
-            return "GRANDE";
+            return TypePackageEnum.MEDIANO;
         }
     }
 
@@ -52,11 +53,11 @@ public class Packages implements Serializable {
         this.id = id;
     }
 
-    public String getTypePackage() {
+    public TypePackageEnum getTypePackage() {
         return typePackage;
     }
 
-    public void setTypePackage(String typePackage) {
+    public void setTypePackage(TypePackageEnum typePackage) {
         this.typePackage = typePackage;
     }
 

@@ -62,7 +62,7 @@ public class MessagingServiceImple implements MessagingService {
 
         Integer peso = sendPackageDTO.getPesoPaquete();
         Integer valorPackages = sendPackageDTO.getValorPaquete();
-        String tipoPaquete = Packages.tipoPaquete(peso);
+        TypePackageEnum tipoPaquete = Packages.tipoPaquete(peso);
         Integer valorEnvio = SendPackage.valorEnvio(tipoPaquete.toString());
         StateSendPackageEnum estadoEnvio = StateSendPackageEnum.RECIBIDO;
 

@@ -1,5 +1,6 @@
 package com.mensajeria.ServicioMensajeria.Model;
 
+import com.mensajeria.ServicioMensajeria.Exception.ExcepcionCustomer;
 import org.mapstruct.InheritConfiguration;
 
 import javax.persistence.*;
@@ -29,5 +30,11 @@ public class Customer extends Person  implements Serializable {
         this.sendPackages = sendPackages;
     }
 
+    public static void validarCliente(Integer pesoPaquete, TypePackageEnum typePackage,  Integer valorPaquete) throws RuntimeException {
+        if (typePackage == null || pesoPaquete < 0  || !(pesoPaquete instanceof Integer) || valorPaquete < 0  || !(valorPaquete instanceof Integer)) {
+            throw new ExcepcionCustomer("Creacion del  Package  no se puede realizar, no cumple los parametros, de valor Package y peso Package no puede ser menor a cero , o Type Package esta null");
+        }
+
+    }
 
 }

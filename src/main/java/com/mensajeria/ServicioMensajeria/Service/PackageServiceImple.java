@@ -3,9 +3,7 @@ package com.mensajeria.ServicioMensajeria.Service;
 
 import com.mensajeria.ServicioMensajeria.Exception.ExcepcionCustomer;
 import com.mensajeria.ServicioMensajeria.Exception.ExcepcionPackage;
-import com.mensajeria.ServicioMensajeria.Model.Employee;
-import com.mensajeria.ServicioMensajeria.Model.Packages;
-import com.mensajeria.ServicioMensajeria.Model.SendPackage;
+import com.mensajeria.ServicioMensajeria.Model.*;
 import com.mensajeria.ServicioMensajeria.Repository.PackageReposImple;
 import com.mensajeria.ServicioMensajeria.Util.UpdateFieldUtil;
 import com.mensajeria.ServicioMensajeria.Util.ValidarCorreo;
@@ -34,10 +32,9 @@ public class PackageServiceImple implements PackageService {
 
         Integer pesoPackage=  packages.getPesoPaquete();
         Integer valorPackage=   packages.getValorPaquete();
-        String typePackage=  packages.getTypePackage();
-        validarCliente(pesoPackage, typePackage, valorPackage );
+        TypePackageEnum typePackage=  packages.getTypePackage();
 
-
+        Customer.validarCliente(pesoPackage, typePackage, valorPackage );
 
         Optional<Packages>packagesOptional=Optional.of(this.packageReposImple.createPackage(packages));
         if (!packagesOptional.isPresent()){
@@ -47,12 +44,7 @@ public class PackageServiceImple implements PackageService {
         return packagesOptional.get();
     }
 
-    private void validarCliente(Integer pesoPaquete, String typePackage,  Integer valorPaquete) throws RuntimeException {
-        if (typePackage == null || pesoPaquete < 0  || !(pesoPaquete instanceof Integer) || valorPaquete < 0  || !(valorPaquete instanceof Integer)) {
-            throw new ExcepcionCustomer("Creacion del  Package  no se puede realizar, no cumple los parametros, de valor Package y peso Package no puede ser menor a cero , o Type Package esta null");
-        }
 
-    }
 
 
 
@@ -97,18 +89,19 @@ public class PackageServiceImple implements PackageService {
 
         Integer pesoPackage=  packages.getPesoPaquete();
         Integer valorPackage=   packages.getValorPaquete();
-        String typePackage=  packages.getTypePackage();
-        validarCliente(pesoPackage, typePackage, valorPackage );
+        TypePackageEnum typePackage=  packages.getTypePackage();
+        Customer.validarCliente(pesoPackage, typePackage, valorPackage );
 
         Optional<Packages> packagesOptional=Optional.ofNullable(this.packageReposImple.getPackages(id));
         if(!packagesOptional.isPresent()){
             throw new ExcepcionPackage("No se pudo realizar el update del package, no existe en la base de datos");
         }
 
+
         packagesOptional.ifPresent(c->{
             UpdateFieldUtil.updateFieldInteger(packages.getPesoPaquete(), c::setPesoPaquete );
             UpdateFieldUtil.updateFieldInteger(packages.getValorPaquete(), c::setValorPaquete );
-            UpdateFieldUtil.updateFieldNullEmptyString(packages.getTypePackage(), c::setTypePackage);
+            UpdateFieldUtil.updateFieldNullEmptyEnumTypePackageEnum(packages.getTypePackage(), c::setTypePackage);
             this.packageReposImple.UpdatePackages(c);
         });
 

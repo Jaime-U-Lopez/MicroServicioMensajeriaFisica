@@ -1,5 +1,7 @@
 package com.mensajeria.ServicioMensajeria.Util;
 
+import com.mensajeria.ServicioMensajeria.Model.TypePackageEnum;
+
 import java.util.Date;
 import java.util.function.Consumer;
 
@@ -12,6 +14,13 @@ public class UpdateFieldUtil {
 
     public static void updateFieldNullEmptyString(String value, Consumer<String> setter) {
         if (value != null && !value.isEmpty()) {
+            setter.accept(value);
+        }
+    }
+
+
+    public static void updateFieldNullEmptyEnumTypePackageEnum(TypePackageEnum value, Consumer<TypePackageEnum> setter) {
+        if (value != null ) {
             setter.accept(value);
         }
     }

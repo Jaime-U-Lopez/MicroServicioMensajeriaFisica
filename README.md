@@ -13,7 +13,7 @@ El patrón Chain of Responsibility se utiliza para la validación de entradas, l
 En resumen, este microservicio de mensajería física de paquetes es una solución eficiente y escalable para la gestión de la mensajería física de paquetes, con operaciones CRUD, querys personalizados de JPA, patrones de diseño, principios SOLID.
 
 
-Para acceder a la documentación de la API 💻, haz clic en  [enlace Swwager](https://microserviciomensajeriafisica-production.up.railway.app/swagger-ui/index.html#/)
+Para acceder a la documentación de la API 💻, haz clic en  [enlace Swagger](https://microserviciomensajeriafisica-production.up.railway.app/swagger-ui/index.html#/)
 
 <div style="display:flex">
 
@@ -38,6 +38,7 @@ width="100">
 * Mokito para pruebas unitarias, como interceptor y emulador de base de datos
 * Con Swagger 3.0.0
 * Queryz personalizados de Jpa
+* Spring Security
 * Inyección de dependencias
 * Maven como gestor de dependencias
 * Patrones DTO y Diseño DAO para Repository
@@ -54,6 +55,51 @@ validando sus de entradas.
 - Employeer
 - Package
 - SendPackage
+
+
+
+##
+## 🏛 FLUJO DEL PROCESO :
+
+                                        +-------+----------+
+                                        |  Cliente         |
+                                        |                  |
+                                        |  Envía Paquete   |
+                                        |                  |
+                                        +-------+----------+
+                                                |
+                                                v
+                                        +-------+--------+
+                                        |  Empleado      |
+                                        |                |
+                                        |  Recibe Paquete|
+                                        |                |
+                                        +-------+--------+
+                                                |
+                                                v
+                                        +-------+--------+
+                                        |  Empleado      |
+                                        |                |
+                                        | Envía Paquete  |
+                                        |  (a destinatario)|
+                                        +-------+--------+
+                                                |
+                                                v
+                                        +-------+--------+
+                                        |  Destinatario  |
+                                        |                |
+                                        | Recibe Paquete|
+                                        |                |
+                                        +-------+--------+
+                                                |
+                                                v
+                                        +-------+--------+
+                                        |  Destinatario  |
+                                        |                |
+                                        |  Acepta Paquete|
+                                        |                |
+                                        +----------------+
+
 
 ##
 ## 🌐 Diagrama de entidades :

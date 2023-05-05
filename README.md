@@ -59,7 +59,7 @@ validando sus de entradas.
 
 
 ##
-## 🏛 FLUJO DEL PROCESO :
+## 🏛 Flujo del proceso :
 
                                         +-------+----------+
                                         |  Cliente         |

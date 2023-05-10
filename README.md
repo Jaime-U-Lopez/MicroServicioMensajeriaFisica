@@ -61,44 +61,9 @@ validando sus de entradas.
 ##
 ## 🏛 Flujo del proceso :
 
-                                        +-------+----------+
-                                        |  Cliente         |
-                                        |                  |
-                                        |  Envía Paquete   |
-                                        |                  |
-                                        +-------+----------+
-                                                |
-                                                v
-                                        +-------+--------+
-                                        |  Empleado      |
-                                        |                |
-                                        |  Recibe Paquete|
-                                        |                |
-                                        +-------+--------+
-                                                |
-                                                v
-                                        +-------+--------+
-                                        |  Empleado      |
-                                        |                |
-                                        | Envía Paquete  |
-                                        |  (a destinatario)|
-                                        +-------+--------+
-                                                |
-                                                v
-                                        +-------+--------+
-                                        |  Destinatario  |
-                                        |                |
-                                        | Recibe Paquete|
-                                        |                |
-                                        +-------+--------+
-                                                |
-                                                v
-                                        +-------+--------+
-                                        |  Destinatario  |
-                                        |                |
-                                        |  Acepta Paquete|
-                                        |                |
-                                        +----------------+
+![image](https://github.com/Jaime-U-Lopez/MicroServicioMensajeriaFisica/assets/50783391/bb4f7203-f368-4849-aed8-610e2620d269)
+
+
 
 
 ##

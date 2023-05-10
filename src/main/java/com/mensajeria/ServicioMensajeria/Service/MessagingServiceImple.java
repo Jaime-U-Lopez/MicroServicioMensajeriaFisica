@@ -193,7 +193,9 @@ public class MessagingServiceImple implements MessagingService {
 
     @Override
     public Boolean delete(Integer id)  throws RuntimeException {
-        Optional<Boolean> customer = Optional.ofNullable(this.sendPackageImple.delete(id));
+
+        Integer idDelete=id;
+        Optional<Boolean> customer = Optional.ofNullable(this.sendPackageImple.delete(idDelete));
 
         if (!customer.isPresent()) {
             throw new RuntimeException("The Customer  not existed in database");

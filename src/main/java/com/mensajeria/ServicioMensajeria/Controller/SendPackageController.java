@@ -123,7 +123,7 @@ public class SendPackageController {
     })
     //  @PreAuthorize("isAuthenticated()")
     @ApiOperation(value = "SendPackages id to delete ",notes = "En este endpoind podras realizar la eliminación de un envio de Paquete  por ID" )
-    @DeleteMapping("packages/{id}")
+    @DeleteMapping("SendPackages/{id}")
     public ResponseEntity<String> delete(@PathVariable @ApiParam(value = "ID SendPackage ", example = "123") Integer id) {
         Boolean deleted = this.messagingServiceImple.delete(id);
         if (deleted) {

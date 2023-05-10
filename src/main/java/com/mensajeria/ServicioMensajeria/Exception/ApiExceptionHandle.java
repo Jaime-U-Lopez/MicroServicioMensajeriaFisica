@@ -1,4 +1,4 @@
-package com.mensajeria.ServicioMensajeria;
+package com.mensajeria.ServicioMensajeria.Exception;
 
 import com.mensajeria.ServicioMensajeria.Dto.ApiException;
 import com.mensajeria.ServicioMensajeria.Exception.ExcepcionCustomer;

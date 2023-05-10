@@ -26,6 +26,7 @@ import java.util.List;
 @RestController
 @RequestMapping("mensajeria/v1/")
 @Api(tags = "SendPackages", description = "Operation for SendPackage  management")
+@CrossOrigin
 public class SendPackageController {
 
     private MessagingServiceImple messagingServiceImple;

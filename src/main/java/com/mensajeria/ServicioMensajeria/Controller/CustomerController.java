@@ -21,6 +21,7 @@ import java.util.List;
 @RestController
 @RequestMapping("mensajeria/v1/")
 @Api(tags = "customers", description = "Operation for customer management")
+@CrossOrigin
 public class CustomerController {
 
 

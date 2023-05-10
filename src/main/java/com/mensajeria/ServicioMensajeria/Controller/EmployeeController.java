@@ -19,6 +19,7 @@ import java.util.List;
 @RestController
 @RequestMapping("mensajeria/v1/")
 @Api(tags = "employees", description = "Operation for Employee management")
+@CrossOrigin
 public class EmployeeController {
 
 

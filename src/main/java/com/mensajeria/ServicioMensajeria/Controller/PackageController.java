@@ -55,7 +55,7 @@ public class PackageController {
             @ApiResponse(description = "404 - Not Found", responseCode = "404"),
             @ApiResponse(description = "500 - Internal error, please validate the entered fields", responseCode = "500")
     })
-    @ApiOperation(value = "Consult all Package",notes = "En este endpoind podras consultar todos los  paquete de la base de datos" )
+    @ApiOperation(value = "Consult all Package",notes = "En este endpoind podras consultar todos los  paquetes de la base de datos" )
     @GetMapping("packages")
     public List<Packages> getEmployeeAll() {
         return this.packageServiceImple.getPackagesAll();
@@ -71,7 +71,7 @@ public class PackageController {
     })
     @ApiOperation(value = "Package id to consult",notes = "En este endpoind podras consultar un paquete por ID" )
     @GetMapping("packages/{id}")
-    public Packages getPackage(@PathVariable @ApiParam(value = "ID SendPackage ", example = "123") Integer id) {
+    public Packages getPackage(@PathVariable @ApiParam(value = "ID Package ", example = "123") Integer id) {
         return this.packageServiceImple.getPackages(id);
     }
 
@@ -102,7 +102,7 @@ public class PackageController {
   //  @PreAuthorize("isAuthenticated()")
     @ApiOperation(value = "Packages id to delete ",notes = "En este endpoind podras realizar la eliminación de un Paquete  por ID" )
     @DeleteMapping("packages/{id}")
-    public ResponseEntity<String> delete(@PathVariable @ApiParam(value = "ID SendPackage ", example = "123") Integer id) {
+    public ResponseEntity<String> delete(@PathVariable @ApiParam(value = "ID Package ", example = "123") Integer id) {
         Boolean deleted = this.packageServiceImple.delete(id);
         if (deleted) {
             String messaje = "El package con numero  " + id + " fue eliminado con exito!";

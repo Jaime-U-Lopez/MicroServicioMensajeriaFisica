@@ -113,4 +113,27 @@ public class SendPackageController {
     }
 
 
+    @ApiResponses(value = {
+            @ApiResponse(description = "400 - Bad Request", responseCode = "400"),
+            @ApiResponse(description = "200 - Request successful", responseCode = "200"),
+            @ApiResponse(description = "401 - Unauthorized", responseCode = "401"),
+            @ApiResponse(description = "403 - Access Denied", responseCode = "403"),
+            @ApiResponse(description = "404 - Not Found", responseCode = "404"),
+            @ApiResponse(description = "500 - Internal error, please validate the entered fields", responseCode = "500")
+    })
+    //  @PreAuthorize("isAuthenticated()")
+    @ApiOperation(value = "SendPackages id to delete ",notes = "En este endpoind podras realizar la eliminación de un envio de Paquete  por ID" )
+    @DeleteMapping("packages/{id}")
+    public ResponseEntity<String> delete(@PathVariable @ApiParam(value = "ID SendPackage ", example = "123") Integer id) {
+        Boolean deleted = this.messagingServiceImple.delete(id);
+        if (deleted) {
+            String messaje = "El Sendpackage con numero  " + id + " fue eliminado con exito!";
+            return ResponseEntity.ok(messaje);
+        } else {
+            String messaje = "El sendpackage con numero  " + id + " no fue eliminado, valide el numero de guia ingresado no si exista en la base de datos";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(messaje);
+        }
+    }
+
+
 }

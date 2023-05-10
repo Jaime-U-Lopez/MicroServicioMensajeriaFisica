@@ -196,7 +196,7 @@ public class MessagingServiceImple implements MessagingService {
         Optional<Boolean> customer = Optional.ofNullable(this.sendPackageImple.delete(id));
 
         if (!customer.isPresent()) {
-            throw new RuntimeException("The Employee  not existed in database");
+            throw new RuntimeException("The Customer  not existed in database");
         }
 
         return true;
